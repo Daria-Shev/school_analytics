@@ -16,5 +16,13 @@ namespace school_analytics
         {
             InitializeComponent();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Form ifrm = new data_import();
+            ifrm.Show();
+            this.Close();
+            //this.Hide();
+        }
     }
 }

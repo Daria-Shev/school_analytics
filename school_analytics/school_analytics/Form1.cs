@@ -19,12 +19,24 @@ namespace school_analytics
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Form ifrm = new data_menu();
+            ifrm.Show();
+            //this.Close();
+            this.Hide();
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Form ifrm = new data_menu();
+            ifrm.Show();
+            //this.Close();
+            this.Hide();
         }
     }
 }
