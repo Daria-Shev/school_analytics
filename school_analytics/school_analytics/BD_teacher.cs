@@ -17,8 +17,15 @@ namespace school_analytics
         public class teacherData
         {
             public int teacher_id { get; set; }
-            public string teacher_name { get; set; }
-            public int subject_id { get; set; }
+            public string teacher_last_name { get; set; }
+            public string teacher_first_name { get; set; }
+            public string teacher_middle_name { get; set; }
+            public string teacher_short_name { get; set; }
+            public string teacher_category { get; set; }
+            public string teacher_rank { get; set; }
+            public int teacher_age { get; set; }
+            public int teacher_experience { get; set; }
+
         }
 
         //даные в таблицу перенос  DataSource
@@ -117,17 +124,41 @@ namespace school_analytics
 
         //}
 
-        public object teacher_list()
+        //public object teacher_list()
+        //{
+        //    BD bd = new BD();
+        //    bd.connectionBD();
+        //    string sqlExpression = "SELECT [teacher_id] ,[teacher_short_name] FROM [analytics_school].[dbo].[teacher]";
+        //    SqlDataAdapter adapter = new SqlDataAdapter(sqlExpression, bd.connection);
+        //    DataTable dataTable = new DataTable();
+        //    adapter.Fill(dataTable);
+        //    string json = JsonConvert.SerializeObject(dataTable);
+        //    bd.closeBD();
+        //    return json;
+        //}
+
+        public List<teacherData> teacher_list()
         {
             BD bd = new BD();
             bd.connectionBD();
-            string sqlExpression = "SELECT [teacher_id] ,[teacher_short_name] FROM [analytics_school].[dbo].[teacher]";
-            SqlDataAdapter adapter = new SqlDataAdapter(sqlExpression, bd.connection);
-            DataTable dataTable = new DataTable();
-            adapter.Fill(dataTable);
-            string json = JsonConvert.SerializeObject(dataTable);
+
+            string sqlExpression = "SELECT [teacher_id], [teacher_short_name] FROM [analytics_school].[dbo].[teacher]";
+            SqlCommand cmd = new SqlCommand(sqlExpression, bd.connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            List<teacherData> teachers = new List<teacherData>();
+            while (reader.Read())
+            {
+                teachers.Add(new teacherData
+                {
+                    teacher_id = (int)reader["teacher_id"],
+                    teacher_short_name = reader["teacher_short_name"].ToString()
+                });
+            }
+
             bd.closeBD();
-            return json;
+            return teachers;
         }
+
     }
 }
