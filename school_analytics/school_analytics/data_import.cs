@@ -75,35 +75,66 @@ namespace school_analytics
         }
         private DataTable LoadExcelToDataTable(string path)
         {
-            OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial; // исправлено
+            // Указываем контекст лицензии до открытия файла
+            OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+
             DataTable dt = new DataTable();
 
-            using (var package = new ExcelPackage(new FileInfo(path)))
+            using (var package = new OfficeOpenXml.ExcelPackage(new FileInfo(path)))
             {
-                ExcelWorksheet worksheet = package.Workbook.Worksheets[0]; // первый лист
+                var worksheet = package.Workbook.Worksheets[0];
                 bool hasHeader = true;
 
-                foreach (var firstRowCell in worksheet.Cells[1, 1, 1, worksheet.Dimension.End.Column])
+                // Создаем столбцы
+                for (int col = 1; col <= worksheet.Dimension.End.Column; col++)
                 {
-                    dt.Columns.Add(hasHeader ? firstRowCell.Text : $"Column {firstRowCell.Start.Column}");
+                    string columnName = hasHeader ? worksheet.Cells[1, col].Text : $"Column {col}";
+                    dt.Columns.Add(columnName);
                 }
 
                 int startRow = hasHeader ? 2 : 1;
                 for (int rowNum = startRow; rowNum <= worksheet.Dimension.End.Row; rowNum++)
                 {
-                    var wsRow = worksheet.Cells[rowNum, 1, rowNum, worksheet.Dimension.End.Column];
                     DataRow row = dt.NewRow();
-                    int i = 0;
-                    foreach (var cell in wsRow)
+                    for (int col = 1; col <= worksheet.Dimension.End.Column; col++)
                     {
-                        row[i++] = cell.Text;
+                        row[col - 1] = worksheet.Cells[rowNum, col].Text;
                     }
                     dt.Rows.Add(row);
                 }
             }
 
             return dt;
+
+
         }
+
+        private void SaveToDatabase(DataTable dt)
+        {
+            string connectionString = "Data Source=.;Initial Catalog=SchoolDB;Integrated Security=True";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    string query = @"INSERT INTO StudentGrades
+                             (Прізвище, Імя, ПоБатькові, Стать, УкрМова, УкрЛіт, ЗарубЛіт, АнглМова, ІстУкраїни, ВсесІсторія, Матем, Біологія, Географія, Фізика, Хімія, Мистецтво, Інформ, Технолог, ЗахВіт, Фізра, Астроном)
+                             VALUES (@Прізвище, @Імя, @ПоБатькові, @Стать, @УкрМова, @УкрЛіт, @ЗарубЛіт, @АнглМова, @ІстУкраїни, @ВсесІсторія, @Матем, @Біологія, @Географія, @Фізика, @Хімія, @Мистецтво, @Інформ, @Технолог, @ЗахВіт, @Фізра, @Астроном)";
+
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        foreach (DataColumn col in dt.Columns)
+                        {
+                            cmd.Parameters.AddWithValue("@" + col.ColumnName, row[col] ?? DBNull.Value);
+                        }
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
+
 
 
     }
