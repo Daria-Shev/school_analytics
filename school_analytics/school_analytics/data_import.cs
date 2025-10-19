@@ -38,7 +38,7 @@ namespace school_analytics
             comboBoxTeacher.DataSource = bdTeacher.teacher_list();
             comboBoxTeacher.DisplayMember = "teacher_short_name";
             comboBoxTeacher.ValueMember = "teacher_id";
-            comboBox2.DataSource = class_program;
+            comboBoxCurriculum.DataSource = class_program;
 
 
         }
@@ -109,33 +109,70 @@ namespace school_analytics
 
         }
 
-        private void SaveToDatabase(DataTable dt)
+        //private void SaveToDatabase(DataTable dt)
+        //{
+        //    string connectionString = "Data Source=.;Initial Catalog=SchoolDB;Integrated Security=True";
+
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        connection.Open();
+
+        //        foreach (DataRow row in dt.Rows)
+        //        {
+        //            string query = @"INSERT INTO StudentGrades
+        //                     (Прізвище, Імя, ПоБатькові, Стать, УкрМова, УкрЛіт, ЗарубЛіт, АнглМова, ІстУкраїни, ВсесІсторія, Матем, Біологія, Географія, Фізика, Хімія, Мистецтво, Інформ, Технолог, ЗахВіт, Фізра, Астроном)
+        //                     VALUES (@Прізвище, @Імя, @ПоБатькові, @Стать, @УкрМова, @УкрЛіт, @ЗарубЛіт, @АнглМова, @ІстУкраїни, @ВсесІсторія, @Матем, @Біологія, @Географія, @Фізика, @Хімія, @Мистецтво, @Інформ, @Технолог, @ЗахВіт, @Фізра, @Астроном)";
+
+        //            using (SqlCommand cmd = new SqlCommand(query, connection))
+        //            {
+        //                foreach (DataColumn col in dt.Columns)
+        //                {
+        //                    cmd.Parameters.AddWithValue("@" + col.ColumnName, row[col] ?? DBNull.Value);
+        //                }
+        //                cmd.ExecuteNonQuery();
+        //            }
+        //        }
+        //    }
+        //}
+
+        private void button1_Click(object sender, EventArgs e)
         {
-            string connectionString = "Data Source=.;Initial Catalog=SchoolDB;Integrated Security=True";
+            check_box_data();
+            BD_import bdImport = new BD_import();
+            int newClassId = bdImport.InsertClass(
+                textBox1.Text,                                        // Название класса (string)
+                Convert.ToInt32(comboBoxTeacher.SelectedValue),      // ID учителя (int)
+                Convert.ToInt32(textBox2.Text),                      // Учебный год (int)
+                comboBoxCurriculum.SelectedItem.ToString()          // Учебная программа (string)
+            );
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
 
-                foreach (DataRow row in dt.Rows)
-                {
-                    string query = @"INSERT INTO StudentGrades
-                             (Прізвище, Імя, ПоБатькові, Стать, УкрМова, УкрЛіт, ЗарубЛіт, АнглМова, ІстУкраїни, ВсесІсторія, Матем, Біологія, Географія, Фізика, Хімія, Мистецтво, Інформ, Технолог, ЗахВіт, Фізра, Астроном)
-                             VALUES (@Прізвище, @Імя, @ПоБатькові, @Стать, @УкрМова, @УкрЛіт, @ЗарубЛіт, @АнглМова, @ІстУкраїни, @ВсесІсторія, @Матем, @Біологія, @Географія, @Фізика, @Хімія, @Мистецтво, @Інформ, @Технолог, @ЗахВіт, @Фізра, @Астроном)";
-
-                    using (SqlCommand cmd = new SqlCommand(query, connection))
-                    {
-                        foreach (DataColumn col in dt.Columns)
-                        {
-                            cmd.Parameters.AddWithValue("@" + col.ColumnName, row[col] ?? DBNull.Value);
-                        }
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-            }
         }
 
 
 
+
+        private void check_box_data()
+        {
+            // Перевірка полів текстбоксів і комбобоксів
+            if (string.IsNullOrWhiteSpace(textBox1.Text) ||
+                comboBoxTeacher.SelectedValue == null ||
+                comboBoxCurriculum.SelectedItem == null ||
+                string.IsNullOrWhiteSpace(textBox2.Text))
+            {
+                MessageBox.Show("Будь ласка, заповніть усі поля!",
+                                "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Окрема перевірка DataGridView
+            if (dataGridView1.Rows.Count == 0 ||
+                (dataGridView1.AllowUserToAddRows && dataGridView1.Rows.Count == 1))
+            {
+                MessageBox.Show("Будь ласка, додайте дані в таблицю!",
+                                "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+        }
     }
 }

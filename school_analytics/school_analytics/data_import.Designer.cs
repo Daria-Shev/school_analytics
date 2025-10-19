@@ -37,7 +37,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxTeacher = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBoxCurriculum = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -127,13 +127,13 @@
             this.comboBoxTeacher.Size = new System.Drawing.Size(198, 21);
             this.comboBoxTeacher.TabIndex = 96;
             // 
-            // comboBox2
+            // comboBoxCurriculum
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(669, 86);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(198, 21);
-            this.comboBox2.TabIndex = 97;
+            this.comboBoxCurriculum.FormattingEnabled = true;
+            this.comboBoxCurriculum.Location = new System.Drawing.Point(669, 86);
+            this.comboBoxCurriculum.Name = "comboBoxCurriculum";
+            this.comboBoxCurriculum.Size = new System.Drawing.Size(198, 21);
+            this.comboBoxCurriculum.TabIndex = 97;
             // 
             // button1
             // 
@@ -146,6 +146,7 @@
             this.button1.TabIndex = 98;
             this.button1.Text = "Зберегти";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button3
             // 
@@ -168,7 +169,7 @@
             this.ClientSize = new System.Drawing.Size(969, 400);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.comboBoxCurriculum);
             this.Controls.Add(this.comboBoxTeacher);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -197,7 +198,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBoxTeacher;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBoxCurriculum;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
     }
