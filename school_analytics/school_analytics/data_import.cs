@@ -289,7 +289,9 @@ namespace school_analytics
 
                 // Проверяем 0-ю колонку на номер
                 string firstCell = row.Cells[0].Value?.ToString()?.Trim();
-                if (string.IsNullOrEmpty(firstCell)) break; // если нет номера — дальше пусто, выходим из цикла
+                if (string.IsNullOrEmpty(firstCell))
+                { MessageBox.Show($"Успішно збережено"); 
+                    break; }// если нет номера — дальше пусто, выходим из цикла
 
 
                 // 3.1️⃣ Создаем объект ученика
@@ -330,8 +332,6 @@ namespace school_analytics
                         if (string.IsNullOrEmpty(subject) || subject.Equals("ДПА1", StringComparison.OrdinalIgnoreCase))
                         {
                             // Пустая ячейка или дошли до ДПА1 — заканчиваем цикл
-                            MessageBox.Show($"Успішно збережено");
-
                             break;
 
                         }
