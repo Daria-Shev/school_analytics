@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace school_analytics
 {
@@ -80,9 +81,9 @@ VALUES
             return newStudentId;
         }
 
+        //Временая проверка удалить потом 1
 
-
-        public void InsertGrade(string teacherShortName, string subjectShortName, int gradeValue, int studentId)
+        public void InsertGrade1(string teacherShortName, string subjectShortName, int gradeValue, int studentId)
         {
             BD bd = new BD();
             bd.connectionBD();
@@ -91,27 +92,34 @@ VALUES
             SqlCommand cmdTeacher = new SqlCommand(queryTeacher, bd.connection);
             cmdTeacher.Parameters.AddWithValue("@short_name", teacherShortName);
             int teacherId = Convert.ToInt32(cmdTeacher.ExecuteScalar());
+            MessageBox.Show($"Предмет: '{teacherShortName}'\nSubjectId: {teacherId}", "Debug Subject");
 
             //string querySubject = "SELECT subject_id FROM subject WHERE subject_short_name = @short_name";
             //SqlCommand cmdSubject = new SqlCommand(querySubject, bd.connection);
             //cmdSubject.Parameters.AddWithValue("@short_name", subjectShortName);
             //int subjectId = Convert.ToInt32(cmdSubject.ExecuteScalar());
 
-            // 2️⃣ Получаем subject_id регистронезависимо
-            string querySubject = @"
-                SELECT subject_id 
-                FROM subject 
-                WHERE RTRIM(LTRIM(subject_short_name)) COLLATE SQL_Latin1_General_CP1_CI_AS = @short_name";
+            //// 2️⃣ Получаем subject_id регистронезависимо
+            //string querySubject = @"
+            //    SELECT subject_id 
+            //    FROM subject 
+            //    WHERE RTRIM(LTRIM(subject_short_name)) COLLATE SQL_Latin1_General_CP1_CI_AS = @short_name";
 
+            //SqlCommand cmdSubject = new SqlCommand(querySubject, bd.connection);
+
+            //// Обрезаем пробелы в C# тоже на всякий случай
+            //string subjectClean = subjectShortName?.Trim();
+
+            //cmdSubject.Parameters.AddWithValue("@short_name", subjectClean);
+            //int subjectId = Convert.ToInt32(cmdSubject.ExecuteScalar());
+
+            // Получаем subject_id точно так же, как teacher
+            string querySubject = "SELECT subject_id FROM subject WHERE subject_short_name = @short_name";
             SqlCommand cmdSubject = new SqlCommand(querySubject, bd.connection);
+            MessageBox.Show($"SubjectClean: '{subjectShortName}'\nTeacherClean: '{subjectShortName}'", "Debug");
 
-            // Обрезаем пробелы в C# тоже на всякий случай
-            string subjectClean = subjectShortName?.Trim();
-
-            cmdSubject.Parameters.AddWithValue("@short_name", subjectClean);
+            cmdSubject.Parameters.AddWithValue("@short_name", subjectShortName);
             int subjectId = Convert.ToInt32(cmdSubject.ExecuteScalar());
-
-
 
             string queryInsert = @"
         INSERT INTO grade (subject_id, teacher_id, grade_value, student_id)
@@ -127,6 +135,58 @@ VALUES
             bd.closeBD();
         }
 
+
+        public void InsertGrade(string teacherShortName, string subjectShortName, int gradeValue, int studentId)
+        {
+            BD bd = new BD();
+            bd.connectionBD();
+
+            // Чистим строки от пробелов, неразрывных пробелов и табуляций
+            string teacherClean = teacherShortName?.Trim().Replace("\u00A0", "").Replace("\t", "");
+            string subjectClean = subjectShortName?.Trim().Replace("\u00A0", "").Replace("\t", "");
+            // 🔹 Выводим для проверки
+            //MessageBox.Show($"SubjectClean: '{subjectClean}'\nTeacherClean: '{teacherClean}'", "Debug");
+
+
+
+            string queryTeacher = "SELECT teacher_id FROM teacher WHERE teacher_short_name = @short_name";
+            SqlCommand cmdTeacher = new SqlCommand(queryTeacher, bd.connection);
+            cmdTeacher.Parameters.AddWithValue("@short_name", teacherShortName);
+            int teacherId = Convert.ToInt32(cmdTeacher.ExecuteScalar());
+
+
+
+
+            
+            // Получаем subject_id, регистронезависимо
+            string querySubject = @"
+ SELECT TOP 1 subject_id 
+ FROM subject 
+ WHERE LOWER(REPLACE(REPLACE(LTRIM(RTRIM(subject_short_name)), CHAR(160), ''), CHAR(9), ''))
+       LIKE LOWER(@short_name + '%')";
+
+            SqlCommand cmdSubject = new SqlCommand(querySubject, bd.connection);
+            cmdSubject.Parameters.AddWithValue("@short_name", subjectClean.ToLower());
+            object subjectObj = cmdSubject.ExecuteScalar();
+            if (subjectObj == null)
+                throw new Exception($"Предмет '{subjectClean}' не найден в базе!");
+            int subjectId = Convert.ToInt32(subjectObj);
+            // Получаем teacher_id, регистронезависимо
+            
+           
+            // Вставляем оценку
+            string queryInsert = @"
+        INSERT INTO grade (subject_id, teacher_id, grade_value, student_id)
+        VALUES (@subject_id, @teacher_id, @grade_value, @student_id)";
+            SqlCommand cmdInsert = new SqlCommand(queryInsert, bd.connection);
+            cmdInsert.Parameters.AddWithValue("@subject_id", subjectId);
+            cmdInsert.Parameters.AddWithValue("@teacher_id", teacherId);
+            cmdInsert.Parameters.AddWithValue("@grade_value", gradeValue);
+            cmdInsert.Parameters.AddWithValue("@student_id", studentId);
+            cmdInsert.ExecuteNonQuery();
+
+            bd.closeBD();
+        }
 
 
 

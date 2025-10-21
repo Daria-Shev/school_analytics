@@ -287,6 +287,11 @@ namespace school_analytics
                 var row = dataGridView1.Rows[i];
                 if (row.IsNewRow) continue; // пропускаем пустую строку в конце
 
+                // Проверяем 0-ю колонку на номер
+                string firstCell = row.Cells[0].Value?.ToString()?.Trim();
+                if (string.IsNullOrEmpty(firstCell)) break; // если нет номера — дальше пусто, выходим из цикла
+
+
                 // 3.1️⃣ Создаем объект ученика
                 BD_import.studentData student = new BD_import.studentData
                 {
@@ -297,10 +302,18 @@ namespace school_analytics
                         !string.IsNullOrEmpty(row.Cells[6].Value?.ToString())
                         ? row.Cells[6].Value.ToString().Trim().Substring(0, 1)
                         : null,
-                    student_dpa_1 = row.Cells["ДПА1"]?.Value?.ToString(),
-                    student_dpa_2 = row.Cells["ДПА2"]?.Value?.ToString(),
-                    student_dpa_3 = row.Cells["ДПА3"]?.Value?.ToString(),
-                    student_dpa_4 = row.Cells["ДПА4"]?.Value?.ToString()
+                    student_dpa_1 = row.DataGridView.Columns.Contains("ДПА1")
+                    ? row.Cells["ДПА1"]?.Value?.ToString()
+                    : null,
+                    student_dpa_2 = row.DataGridView.Columns.Contains("ДПА2")
+                    ? row.Cells["ДПА2"]?.Value?.ToString()
+                    : null,
+                    student_dpa_3 = row.DataGridView.Columns.Contains("ДПА3")
+                    ? row.Cells["ДПА3"]?.Value?.ToString()
+                    : null,
+                    student_dpa_4 = row.DataGridView.Columns.Contains("ДПА4")
+                    ? row.Cells["ДПА4"]?.Value?.ToString()
+                    : null
                 };
 
                 try
@@ -317,11 +330,19 @@ namespace school_analytics
                         if (string.IsNullOrEmpty(subject) || subject.Equals("ДПА1", StringComparison.OrdinalIgnoreCase))
                         {
                             // Пустая ячейка или дошли до ДПА1 — заканчиваем цикл
+                            MessageBox.Show($"Успішно збережено");
+
                             break;
+
                         }
+
 
                         string teacher = teachersRow.Cells[col].Value?.ToString()?.Trim(); // учитель
                         string gradeText = row.Cells[col].Value?.ToString()?.Trim();        // оценка ученика
+
+                        // 🔹 Пропускаем, если нет оценки
+                        if (string.IsNullOrWhiteSpace(gradeText))
+                            continue;
 
                         if (!string.IsNullOrWhiteSpace(gradeText) && int.TryParse(gradeText, out int grade))
                         {
