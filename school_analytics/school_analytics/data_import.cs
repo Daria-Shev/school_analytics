@@ -74,24 +74,74 @@ namespace school_analytics
                 }
             }
         }
+        //private DataTable LoadExcelToDataTable(string path)
+        //{
+        //    OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+        //    DataTable dt = new DataTable();
+
+        //    using (var package = new OfficeOpenXml.ExcelPackage(new FileInfo(path)))
+        //    {
+        //        var worksheet = package.Workbook.Worksheets[0];
+
+        //        // Создаем нужное количество столбцов (без имен)
+        //        int colCount = worksheet.Dimension.End.Column;
+        //        for (int col = 1; col <= colCount; col++)
+        //        {
+        //            dt.Columns.Add($"Column {col}");
+        //        }
+
+        //        // Заполняем строки
+        //        for (int row = 1; row <= worksheet.Dimension.End.Row; row++)
+        //        {
+        //            DataRow newRow = dt.NewRow();
+        //            for (int col = 1; col <= colCount; col++)
+        //            {
+        //                newRow[col - 1] = worksheet.Cells[row, col].Text;
+        //            }
+        //            dt.Rows.Add(newRow);
+        //        }
+        //    }
+
+        //    return dt;
+        //}
+
         private DataTable LoadExcelToDataTable(string path)
         {
             OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
             DataTable dt = new DataTable();
+            HashSet<string> columnNames = new HashSet<string>(); // для уникальности имен колонок
 
             using (var package = new OfficeOpenXml.ExcelPackage(new FileInfo(path)))
             {
                 var worksheet = package.Workbook.Worksheets[0];
 
-                // Создаем нужное количество столбцов (без имен)
                 int colCount = worksheet.Dimension.End.Column;
+                int rowCount = worksheet.Dimension.End.Row;
+
+                // 1️⃣ Создаем столбцы с уникальными именами
                 for (int col = 1; col <= colCount; col++)
                 {
-                    dt.Columns.Add($"Column {col}");
+                    string colName = worksheet.Cells[1, col].Text.Trim(); // берем текст из первой строки
+                    if (string.IsNullOrEmpty(colName))
+                    {
+                        colName = $"Column{col}";
+                    }
+
+                    // Проверка на повторы
+                    string uniqueName = colName;
+                    int suffix = 1;
+                    while (columnNames.Contains(uniqueName))
+                    {
+                        uniqueName = $"{colName}_{suffix}";
+                        suffix++;
+                    }
+
+                    columnNames.Add(uniqueName);
+                    dt.Columns.Add(uniqueName);
                 }
 
-                // Заполняем строки
-                for (int row = 1; row <= worksheet.Dimension.End.Row; row++)
+                // 2️⃣ Заполняем строки, включая первую строку с названиями
+                for (int row = 1; row <= rowCount; row++) // начинаем с 1, чтобы сохранить первую строку
                 {
                     DataRow newRow = dt.NewRow();
                     for (int col = 1; col <= colCount; col++)
@@ -240,12 +290,17 @@ namespace school_analytics
                 // 3.1️⃣ Создаем объект ученика
                 BD_import.studentData student = new BD_import.studentData
                 {
-                    student_last_name = row.Cells[0].Value?.ToString(),
-                    student_first_name = row.Cells[1].Value?.ToString(),
-                    student_middle_name = row.Cells[2].Value?.ToString(),
-                    student_gender = row.Cells[3].Value?.ToString(),
-                    student_dpa_1 = row.Cells["ДПА2"]?.Value?.ToString(),
-                    student_dpa_2 = row.Cells["ДПА3"]?.Value?.ToString()
+                    student_last_name = row.Cells[3].Value?.ToString(),
+                    student_first_name = row.Cells[4].Value?.ToString(),
+                    student_middle_name = row.Cells[5].Value?.ToString(),
+                    student_gender =
+                        !string.IsNullOrEmpty(row.Cells[6].Value?.ToString())
+                        ? row.Cells[6].Value.ToString().Trim().Substring(0, 1)
+                        : null,
+                    student_dpa_1 = row.Cells["ДПА1"]?.Value?.ToString(),
+                    student_dpa_2 = row.Cells["ДПА2"]?.Value?.ToString(),
+                    student_dpa_3 = row.Cells["ДПА3"]?.Value?.ToString(),
+                    student_dpa_4 = row.Cells["ДПА4"]?.Value?.ToString()
                 };
 
                 try
@@ -257,9 +312,16 @@ namespace school_analytics
                     // Оценки начинаются с 8-й колонки (индекс 7)
                     for (int col = 7; col < dataGridView1.Columns.Count; col++)
                     {
-                        string subject = subjectsRow.Cells[col].Value?.ToString(); // название предмета
-                        string teacher = teachersRow.Cells[col].Value?.ToString(); // учитель
-                        string gradeText = row.Cells[col].Value?.ToString();       // оценка ученика
+                        string subject = subjectsRow.Cells[col].Value?.ToString()?.Trim(); // название предмета
+
+                        if (string.IsNullOrEmpty(subject) || subject.Equals("ДПА1", StringComparison.OrdinalIgnoreCase))
+                        {
+                            // Пустая ячейка или дошли до ДПА1 — заканчиваем цикл
+                            break;
+                        }
+
+                        string teacher = teachersRow.Cells[col].Value?.ToString()?.Trim(); // учитель
+                        string gradeText = row.Cells[col].Value?.ToString()?.Trim();        // оценка ученика
 
                         if (!string.IsNullOrWhiteSpace(gradeText) && int.TryParse(gradeText, out int grade))
                         {

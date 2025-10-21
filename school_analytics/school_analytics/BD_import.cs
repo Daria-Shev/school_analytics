@@ -17,7 +17,9 @@ namespace school_analytics
             public string student_middle_name { get; set; }
             public string student_gender { get; set; }
             public string student_dpa_1 { get; set; }   
-            public string student_dpa_2 { get; set; }  
+            public string student_dpa_2 { get; set; }
+            public string student_dpa_3 { get; set; }
+            public string student_dpa_4 { get; set; }
         }
 
 
@@ -51,20 +53,25 @@ namespace school_analytics
             bd.connectionBD();
 
             string query = @"
-        INSERT INTO student 
-        (student_last_name, student_first_name, student_middle_name, student_gender, 
-         student_dpa_1, student_dpa_2, class_id)
-        OUTPUT INSERTED.student_id
-        VALUES 
-        (@last, @first, @middle, @gender, @dpa1, @dpa2, @class_id)";
+INSERT INTO student 
+(student_last_name, student_first_name, student_middle_name, student_gender, 
+ student_dpa_1, student_dpa_2, student_dpa_3, student_dpa_4, class_id)
+OUTPUT INSERTED.student_id
+VALUES 
+(@last, @first, @middle, @gender, @dpa1, @dpa2, @dpa3, @dpa4, @class_id)";
 
             SqlCommand cmd = new SqlCommand(query, bd.connection);
             cmd.Parameters.AddWithValue("@last", student.student_last_name);
             cmd.Parameters.AddWithValue("@first", student.student_first_name);
             cmd.Parameters.AddWithValue("@middle", student.student_middle_name);
             cmd.Parameters.AddWithValue("@gender", student.student_gender);
-            cmd.Parameters.AddWithValue("@dpa1", student.student_dpa_1);
-            cmd.Parameters.AddWithValue("@dpa2", student.student_dpa_2);
+
+            // безопасная вставка DPA полей
+            cmd.Parameters.AddWithValue("@dpa1", string.IsNullOrWhiteSpace(student.student_dpa_1) ? (object)DBNull.Value : student.student_dpa_1);
+            cmd.Parameters.AddWithValue("@dpa2", string.IsNullOrWhiteSpace(student.student_dpa_2) ? (object)DBNull.Value : student.student_dpa_2);
+            cmd.Parameters.AddWithValue("@dpa3", string.IsNullOrWhiteSpace(student.student_dpa_3) ? (object)DBNull.Value : student.student_dpa_3);
+            cmd.Parameters.AddWithValue("@dpa4", string.IsNullOrWhiteSpace(student.student_dpa_4) ? (object)DBNull.Value : student.student_dpa_4);
+
             cmd.Parameters.AddWithValue("@class_id", classId);
 
             int newStudentId = (int)cmd.ExecuteScalar(); // отримуємо ID створеного учня
@@ -72,6 +79,7 @@ namespace school_analytics
 
             return newStudentId;
         }
+
 
 
         public void InsertGrade(string teacherShortName, string subjectShortName, int gradeValue, int studentId)
@@ -84,10 +92,26 @@ namespace school_analytics
             cmdTeacher.Parameters.AddWithValue("@short_name", teacherShortName);
             int teacherId = Convert.ToInt32(cmdTeacher.ExecuteScalar());
 
-            string querySubject = "SELECT subject_id FROM subject WHERE subject_short_name = @short_name";
+            //string querySubject = "SELECT subject_id FROM subject WHERE subject_short_name = @short_name";
+            //SqlCommand cmdSubject = new SqlCommand(querySubject, bd.connection);
+            //cmdSubject.Parameters.AddWithValue("@short_name", subjectShortName);
+            //int subjectId = Convert.ToInt32(cmdSubject.ExecuteScalar());
+
+            // 2️⃣ Получаем subject_id регистронезависимо
+            string querySubject = @"
+                SELECT subject_id 
+                FROM subject 
+                WHERE RTRIM(LTRIM(subject_short_name)) COLLATE SQL_Latin1_General_CP1_CI_AS = @short_name";
+
             SqlCommand cmdSubject = new SqlCommand(querySubject, bd.connection);
-            cmdSubject.Parameters.AddWithValue("@short_name", subjectShortName);
+
+            // Обрезаем пробелы в C# тоже на всякий случай
+            string subjectClean = subjectShortName?.Trim();
+
+            cmdSubject.Parameters.AddWithValue("@short_name", subjectClean);
             int subjectId = Convert.ToInt32(cmdSubject.ExecuteScalar());
+
+
 
             string queryInsert = @"
         INSERT INTO grade (subject_id, teacher_id, grade_value, student_id)
