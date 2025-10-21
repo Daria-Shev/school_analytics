@@ -55,7 +55,7 @@ namespace school_analytics
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.Filter = "Excel Files|*.xlsx;*.xls";
-                openFileDialog.Title = "Выберите Excel файл";
+                openFileDialog.Title = "Оберіть Excel файл";
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -64,50 +64,83 @@ namespace school_analytics
                     try
                     {
                         DataTable dt = LoadExcelToDataTable(filePath);
-                        dataGridView1.DataSource = dt; // отображаем в DataGridView
+                        dataGridView1.DataSource = dt;
+                        dataGridView1.ColumnHeadersVisible = false; // ← вот это скрывает “Column 1” и т.п.
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Ошибка при загрузке Excel: " + ex.Message);
+                        MessageBox.Show("Помилка при завантаженні Excel: " + ex.Message);
                     }
                 }
             }
         }
         private DataTable LoadExcelToDataTable(string path)
         {
-            // Указываем контекст лицензии до открытия файла
             OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
-
             DataTable dt = new DataTable();
 
             using (var package = new OfficeOpenXml.ExcelPackage(new FileInfo(path)))
             {
                 var worksheet = package.Workbook.Worksheets[0];
-                bool hasHeader = true;
 
-                // Создаем столбцы
-                for (int col = 1; col <= worksheet.Dimension.End.Column; col++)
+                // Создаем нужное количество столбцов (без имен)
+                int colCount = worksheet.Dimension.End.Column;
+                for (int col = 1; col <= colCount; col++)
                 {
-                    string columnName = hasHeader ? worksheet.Cells[1, col].Text : $"Column {col}";
-                    dt.Columns.Add(columnName);
+                    dt.Columns.Add($"Column {col}");
                 }
 
-                int startRow = hasHeader ? 2 : 1;
-                for (int rowNum = startRow; rowNum <= worksheet.Dimension.End.Row; rowNum++)
+                // Заполняем строки
+                for (int row = 1; row <= worksheet.Dimension.End.Row; row++)
                 {
-                    DataRow row = dt.NewRow();
-                    for (int col = 1; col <= worksheet.Dimension.End.Column; col++)
+                    DataRow newRow = dt.NewRow();
+                    for (int col = 1; col <= colCount; col++)
                     {
-                        row[col - 1] = worksheet.Cells[rowNum, col].Text;
+                        newRow[col - 1] = worksheet.Cells[row, col].Text;
                     }
-                    dt.Rows.Add(row);
+                    dt.Rows.Add(newRow);
                 }
             }
 
             return dt;
-
-
         }
+
+        //создает заголовки
+        //private DataTable LoadExcelToDataTable(string path)
+        //{
+        //    // Указываем контекст лицензии до открытия файла
+        //    OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+
+        //    DataTable dt = new DataTable();
+
+        //    using (var package = new OfficeOpenXml.ExcelPackage(new FileInfo(path)))
+        //    {
+        //        var worksheet = package.Workbook.Worksheets[0];
+        //        bool hasHeader = true;
+
+        //        // Создаем столбцы
+        //        for (int col = 1; col <= worksheet.Dimension.End.Column; col++)
+        //        {
+        //            string columnName = hasHeader ? worksheet.Cells[1, col].Text : $"Column {col}";
+        //            dt.Columns.Add(columnName);
+        //        }
+
+        //        int startRow = hasHeader ? 2 : 1;
+        //        for (int rowNum = startRow; rowNum <= worksheet.Dimension.End.Row; rowNum++)
+        //        {
+        //            DataRow row = dt.NewRow();
+        //            for (int col = 1; col <= worksheet.Dimension.End.Column; col++)
+        //            {
+        //                row[col - 1] = worksheet.Cells[rowNum, col].Text;
+        //            }
+        //            dt.Rows.Add(row);
+        //        }
+        //    }
+
+        //    return dt;
+
+
+        //}
 
         //private void SaveToDatabase(DataTable dt)
         //{
@@ -135,20 +168,111 @@ namespace school_analytics
         //    }
         //}
 
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    check_box_data();
+        //    BD_import bdImport = new BD_import();
+        //    int newClassId = bdImport.InsertClass(
+        //        textBox1.Text,                                        // Название класса (string)
+        //        Convert.ToInt32(comboBoxTeacher.SelectedValue),      // ID учителя (int)
+        //        Convert.ToInt32(textBox2.Text),                      // Учебный год (int)
+        //        comboBoxCurriculum.SelectedItem.ToString()          // Учебная программа (string)
+        //    );
+
+        //    // 2️⃣ Теперь переносим учеников из таблицы
+        //    foreach (DataGridViewRow row in dataGridView1.Rows)
+        //    {
+        //        if (row.IsNewRow) continue;
+
+        //        if (row.Cells[0].Value == null || row.Cells[1].Value == null) continue;
+
+        //        BD_import.studentData student = new BD_import.studentData
+        //        {
+        //            student_last_name = row.Cells["прізвище"].Value?.ToString(),
+        //            student_first_name = row.Cells["ім’я"].Value?.ToString(),
+        //            student_middle_name = row.Cells["по батькові"].Value?.ToString(),
+        //            student_gender = row.Cells["стать"].Value?.ToString(),
+        //            student_dpa_1 = row.Cells["ДПА2"]?.Value?.ToString(),
+        //            student_dpa_2 = row.Cells["ДПА3"]?.Value?.ToString()
+        //        };
+
+        //        try
+        //        {
+        //            int newStudentId = bdImport.InsertStudent(student, newClassId);
+
+        //            // 👉 Здесь у тебя есть ID ученика, можно использовать как нужно:
+        //            //Console.WriteLine($"Добавлен ученик {student.student_last_name}, ID = {newStudentId}");
+
+        //            // Если позже нужно добавить оценки:
+        //            // bdImport.InsertGrade(teacherShortName, subjectShortName, gradeValue, newStudentId);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show($"Помилка при додаванні учня {student.student_last_name}: {ex.Message}");
+        //        }
+        //    }
+
+        //}
+
         private void button1_Click(object sender, EventArgs e)
         {
             check_box_data();
             BD_import bdImport = new BD_import();
+
+            // 1️⃣ Создаем новый класс
             int newClassId = bdImport.InsertClass(
-                textBox1.Text,                                        // Название класса (string)
-                Convert.ToInt32(comboBoxTeacher.SelectedValue),      // ID учителя (int)
-                Convert.ToInt32(textBox2.Text),                      // Учебный год (int)
-                comboBoxCurriculum.SelectedItem.ToString()          // Учебная программа (string)
+                textBox1.Text,                                        // Название класса
+                Convert.ToInt32(comboBoxTeacher.SelectedValue),      // ID учителя
+                Convert.ToInt32(textBox2.Text),                      // Учебный год
+                comboBoxCurriculum.SelectedItem.ToString()           // Учебная программа
             );
 
+            // 2️⃣ Берем строки с названиями предметов и учителей
+            var subjectsRow = dataGridView1.Rows[0]; // строка 0 — предметы
+            var teachersRow = dataGridView1.Rows[1]; // строка 1 — учителя
 
+            // 3️⃣ Переносим учеников и их оценки
+            for (int i = 2; i < dataGridView1.Rows.Count; i++) // начиная с 2-й строки — ученики
+            {
+                var row = dataGridView1.Rows[i];
+                if (row.IsNewRow) continue; // пропускаем пустую строку в конце
+
+                // 3.1️⃣ Создаем объект ученика
+                BD_import.studentData student = new BD_import.studentData
+                {
+                    student_last_name = row.Cells[0].Value?.ToString(),
+                    student_first_name = row.Cells[1].Value?.ToString(),
+                    student_middle_name = row.Cells[2].Value?.ToString(),
+                    student_gender = row.Cells[3].Value?.ToString(),
+                    student_dpa_1 = row.Cells["ДПА2"]?.Value?.ToString(),
+                    student_dpa_2 = row.Cells["ДПА3"]?.Value?.ToString()
+                };
+
+                try
+                {
+                    // 3.2️⃣ Вставляем ученика в БД и получаем его ID
+                    int newStudentId = bdImport.InsertStudent(student, newClassId);
+
+                    // 3.3️⃣ Добавляем оценки
+                    // Оценки начинаются с 8-й колонки (индекс 7)
+                    for (int col = 7; col < dataGridView1.Columns.Count; col++)
+                    {
+                        string subject = subjectsRow.Cells[col].Value?.ToString(); // название предмета
+                        string teacher = teachersRow.Cells[col].Value?.ToString(); // учитель
+                        string gradeText = row.Cells[col].Value?.ToString();       // оценка ученика
+
+                        if (!string.IsNullOrWhiteSpace(gradeText) && int.TryParse(gradeText, out int grade))
+                        {
+                            bdImport.InsertGrade(teacher, subject, grade, newStudentId);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Помилка при додаванні учня {student.student_last_name}: {ex.Message}");
+                }
+            }
         }
-
 
 
 
