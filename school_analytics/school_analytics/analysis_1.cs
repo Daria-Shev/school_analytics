@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace school_analytics
 {
@@ -28,8 +29,14 @@ namespace school_analytics
             allData = diagram_table.GetClassStudentGrades();
 
             // Например: строим диаграмму успеваемости по предметам
-            DrawChartByGenderAndYear(allData);
+            DrawChart(allData);
 
+
+        }
+
+        private void DrawChart(DataTable table)
+        {
+            DrawChartByGenderAndYear(table);
 
         }
         private void DrawChartByGenderAndYear(DataTable table)
@@ -99,8 +106,54 @@ namespace school_analytics
             girlsSeries["DrawSideBySide"] = "True";
         }
 
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateFilteredData();
+        }
 
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateFilteredData();
 
+        }
 
+        private void UpdateFilteredData()
+        {
+            if (allData == null || allData.Rows.Count == 0)
+                return;
+
+            bool show9 = checkBox9.Checked;
+            bool show11 = checkBox11.Checked;
+
+            DataTable filtered = allData.Clone();
+
+            if (show9 && show11)
+            {
+                // оба выбраны → все данные
+                filtered = allData.Copy();
+            }
+            else if (show9)
+            {
+                // только 9 классы
+                var rows = allData.AsEnumerable()
+                    .Where(r => r.Field<string>("class_name").TrimStart().StartsWith("9"));
+                if (rows.Any()) filtered = rows.CopyToDataTable();
+            }
+            else if (show11)
+            {
+                // только 11 классы
+                var rows = allData.AsEnumerable()
+                    .Where(r => r.Field<string>("class_name").TrimStart().StartsWith("11"));
+                if (rows.Any()) filtered = rows.CopyToDataTable();
+            }
+            else
+            {
+                // ничего не выбрано → пустая таблица
+                filtered = allData.Clone();
+            }
+
+            // теперь передаём в твой метод отрисовки
+            DrawChartByGenderAndYear(filtered);
+        }
     }
 }
