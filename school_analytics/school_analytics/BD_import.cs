@@ -47,12 +47,43 @@ namespace school_analytics
             return newClassId;
         }
 
-        // 🔹 Метод для додавання учня
         public int InsertStudent(studentData student, int classId)
         {
             BD bd = new BD();
             bd.connectionBD();
 
+            // 🔹 На всякий случай очистим входные строки
+            string Clean(string s) => string.IsNullOrWhiteSpace(s)
+                ? null
+                : s.Trim().ToLower();
+
+            // 🔹 Локальная функция для получения dpa_id по названию
+            int? GetDpaId(string dpaName)
+            {
+                if (string.IsNullOrWhiteSpace(dpaName))
+                    return null;
+
+                string queryDpa = @"
+SELECT TOP 1 dpa_id
+FROM dpa
+WHERE LOWER(REPLACE(REPLACE(LTRIM(RTRIM(dpa_name)), CHAR(160), ''), CHAR(9), ''))
+      LIKE LOWER(@dpa_name + '%')";
+
+                using (SqlCommand cmdDpa = new SqlCommand(queryDpa, bd.connection))
+                {
+                    cmdDpa.Parameters.AddWithValue("@dpa_name", Clean(dpaName));
+                    object result = cmdDpa.ExecuteScalar();
+                    return result == null ? (int?)null : Convert.ToInt32(result);
+                }
+            }
+
+            // 🔹 Получаем ID-шники DPA по именам
+            int? dpa1_id = GetDpaId(student.student_dpa_1);
+            int? dpa2_id = GetDpaId(student.student_dpa_2);
+            int? dpa3_id = GetDpaId(student.student_dpa_3);
+            int? dpa4_id = GetDpaId(student.student_dpa_4);
+
+            // 🔹 Основной запрос вставки студента
             string query = @"
 INSERT INTO student 
 (student_last_name, student_first_name, student_middle_name, student_gender, 
@@ -61,25 +92,66 @@ OUTPUT INSERTED.student_id
 VALUES 
 (@last, @first, @middle, @gender, @dpa1, @dpa2, @dpa3, @dpa4, @class_id)";
 
-            SqlCommand cmd = new SqlCommand(query, bd.connection);
-            cmd.Parameters.AddWithValue("@last", student.student_last_name);
-            cmd.Parameters.AddWithValue("@first", student.student_first_name);
-            cmd.Parameters.AddWithValue("@middle", student.student_middle_name);
-            cmd.Parameters.AddWithValue("@gender", student.student_gender);
+            using (SqlCommand cmd = new SqlCommand(query, bd.connection))
+            {
+                cmd.Parameters.AddWithValue("@last", student.student_last_name);
+                cmd.Parameters.AddWithValue("@first", student.student_first_name);
+                cmd.Parameters.AddWithValue("@middle", student.student_middle_name);
+                cmd.Parameters.AddWithValue("@gender", student.student_gender);
 
-            // безопасная вставка DPA полей
-            cmd.Parameters.AddWithValue("@dpa1", string.IsNullOrWhiteSpace(student.student_dpa_1) ? (object)DBNull.Value : student.student_dpa_1);
-            cmd.Parameters.AddWithValue("@dpa2", string.IsNullOrWhiteSpace(student.student_dpa_2) ? (object)DBNull.Value : student.student_dpa_2);
-            cmd.Parameters.AddWithValue("@dpa3", string.IsNullOrWhiteSpace(student.student_dpa_3) ? (object)DBNull.Value : student.student_dpa_3);
-            cmd.Parameters.AddWithValue("@dpa4", string.IsNullOrWhiteSpace(student.student_dpa_4) ? (object)DBNull.Value : student.student_dpa_4);
+                // теперь вставляем ID (или NULL)
+                cmd.Parameters.AddWithValue("@dpa1", dpa1_id.HasValue ? (object)dpa1_id.Value : DBNull.Value);
+                cmd.Parameters.AddWithValue("@dpa2", dpa2_id.HasValue ? (object)dpa2_id.Value : DBNull.Value);
+                cmd.Parameters.AddWithValue("@dpa3", dpa3_id.HasValue ? (object)dpa3_id.Value : DBNull.Value);
+                cmd.Parameters.AddWithValue("@dpa4", dpa4_id.HasValue ? (object)dpa4_id.Value : DBNull.Value);
 
-            cmd.Parameters.AddWithValue("@class_id", classId);
 
-            int newStudentId = (int)cmd.ExecuteScalar(); // отримуємо ID створеного учня
-            bd.closeBD();
+                cmd.Parameters.AddWithValue("@class_id", classId);
 
-            return newStudentId;
+                int newStudentId = (int)cmd.ExecuteScalar();
+                bd.closeBD();
+
+                return newStudentId;
+            }
         }
+
+
+        //        // 🔹 Метод для додавання учня
+        //        public int InsertStudent(studentData student, int classId)
+        //        {
+        //            BD bd = new BD();
+        //            bd.connectionBD();
+
+        //            string query = @"
+        //INSERT INTO student 
+        //(student_last_name, student_first_name, student_middle_name, student_gender, 
+        // student_dpa_1, student_dpa_2, student_dpa_3, student_dpa_4, class_id)
+        //OUTPUT INSERTED.student_id
+        //VALUES 
+        //(@last, @first, @middle, @gender, @dpa1, @dpa2, @dpa3, @dpa4, @class_id)";
+
+        //            SqlCommand cmd = new SqlCommand(query, bd.connection);
+        //            cmd.Parameters.AddWithValue("@last", student.student_last_name);
+        //            cmd.Parameters.AddWithValue("@first", student.student_first_name);
+        //            cmd.Parameters.AddWithValue("@middle", student.student_middle_name);
+        //            cmd.Parameters.AddWithValue("@gender", student.student_gender);
+
+        //            // безопасная вставка DPA полей
+        //            cmd.Parameters.AddWithValue("@dpa1", string.IsNullOrWhiteSpace(student.student_dpa_1) ? (object)DBNull.Value : student.student_dpa_1);
+        //            cmd.Parameters.AddWithValue("@dpa2", string.IsNullOrWhiteSpace(student.student_dpa_2) ? (object)DBNull.Value : student.student_dpa_2);
+        //            cmd.Parameters.AddWithValue("@dpa3", string.IsNullOrWhiteSpace(student.student_dpa_3) ? (object)DBNull.Value : student.student_dpa_3);
+        //            cmd.Parameters.AddWithValue("@dpa4", string.IsNullOrWhiteSpace(student.student_dpa_4) ? (object)DBNull.Value : student.student_dpa_4);
+
+        //            cmd.Parameters.AddWithValue("@class_id", classId);
+
+        //            int newStudentId = (int)cmd.ExecuteScalar(); // отримуємо ID створеного учня
+        //            bd.closeBD();
+
+        //            return newStudentId;
+        //        }
+
+
+
 
         //Временая проверка удалить потом 1
 
