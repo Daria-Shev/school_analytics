@@ -52,6 +52,9 @@ namespace school_analytics
 
         private void buttonLoadExcel_Click(object sender, EventArgs e)
         {
+            dataGridView1.DataSource = null;
+            dataGridView1.Rows.Clear();
+            dataGridView1.Columns.Clear();
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.Filter = "Excel Files|*.xlsx;*.xls";
@@ -107,10 +110,12 @@ namespace school_analytics
 
         private DataTable LoadExcelToDataTable(string path)
         {
+
             OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
             DataTable dt = new DataTable();
             HashSet<string> columnNames = new HashSet<string>(); // для уникальности имен колонок
-
+            dt.Clear();
+            dt.Columns.Clear();
             using (var package = new OfficeOpenXml.ExcelPackage(new FileInfo(path)))
             {
                 var worksheet = package.Workbook.Worksheets[0];
