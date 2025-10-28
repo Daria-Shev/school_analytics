@@ -3,48 +3,44 @@
   "WorkspaceRootPath": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\data_import.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|solutionrelative:school_analytics\\data_import.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|g:\\dasha\\1\u0443\u043D\u0438\u0432\u0435\u0440\\\u0434\u0438\u043F\u043B\u043E\u043C_\u043C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\analysis_teacher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|solutionrelative:school_analytics\\analysis_teacher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\data_import.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|solutionrelative:school_analytics\\data_import.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|g:\\dasha\\1\u0443\u043D\u0438\u0432\u0435\u0440\\\u0434\u0438\u043F\u043B\u043E\u043C_\u043C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\bd_import.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|solutionrelative:school_analytics\\bd_import.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\analysis_1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|solutionrelative:school_analytics\\analysis_1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\analysis_1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|solutionrelative:school_analytics\\analysis_1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\diagram_table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|solutionrelative:school_analytics\\diagram_table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\bd_teacher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|solutionrelative:school_analytics\\bd_teacher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|g:\\dasha\\1\u0443\u043D\u0438\u0432\u0435\u0440\\\u0434\u0438\u043F\u043B\u043E\u043C_\u043C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\analysis_teacher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|solutionrelative:school_analytics\\analysis_teacher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|solutionrelative:school_analytics\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|solutionrelative:school_analytics\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\data_menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|solutionrelative:school_analytics\\data_menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\data_import.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|solutionrelative:school_analytics\\data_import.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\diagram_table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|solutionrelative:school_analytics\\diagram_table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|g:\\dasha\\1\u0443\u043D\u0438\u0432\u0435\u0440\\\u0434\u0438\u043F\u043B\u043E\u043C_\u043C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\data_import.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|solutionrelative:school_analytics\\data_import.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\bd_import.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|solutionrelative:school_analytics\\bd_import.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\bd_teacher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|solutionrelative:school_analytics\\bd_teacher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\data_menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|solutionrelative:school_analytics\\data_menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\data_menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|solutionrelative:school_analytics\\data_menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3837A85-EDF9-4102-A5E1-B84086C1CF9B}|school_analytics\\school_analytics.csproj|G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\bd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -58,23 +54,61 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "analysis_1.cs",
-              "DocumentMoniker": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\analysis_1.cs",
-              "RelativeDocumentMoniker": "school_analytics\\analysis_1.cs",
-              "ToolTip": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\analysis_1.cs",
-              "RelativeToolTip": "school_analytics\\analysis_1.cs",
-              "ViewState": "AgIAAG8AAAAAAAAAAAAmwJsAAAAvAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "analysis_teacher.cs",
+              "DocumentMoniker": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\analysis_teacher.cs",
+              "RelativeDocumentMoniker": "school_analytics\\analysis_teacher.cs",
+              "ToolTip": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\analysis_teacher.cs",
+              "RelativeToolTip": "school_analytics\\analysis_teacher.cs",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAUwGYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T21:07:18.901Z"
+              "WhenOpened": "2025-10-28T21:10:17.277Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "analysis_teacher.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\analysis_teacher.cs",
+              "RelativeDocumentMoniker": "school_analytics\\analysis_teacher.cs",
+              "ToolTip": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\analysis_teacher.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "school_analytics\\analysis_teacher.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T20:10:49.878Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\Form1.cs",
+              "RelativeDocumentMoniker": "school_analytics\\Form1.cs",
+              "ToolTip": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\Form1.cs",
+              "RelativeToolTip": "school_analytics\\Form1.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAEwCsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-11T19:50:12.149Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "data_menu.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\data_menu.cs",
+              "RelativeDocumentMoniker": "school_analytics\\data_menu.cs",
+              "ToolTip": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\data_menu.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "school_analytics\\data_menu.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-11T19:53:41.78Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "data_import.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "DocumentMoniker": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\data_import.cs",
               "RelativeDocumentMoniker": "school_analytics\\data_import.cs",
@@ -86,7 +120,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
+              "Title": "diagram_table.cs",
+              "DocumentMoniker": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\diagram_table.cs",
+              "RelativeDocumentMoniker": "school_analytics\\diagram_table.cs",
+              "ToolTip": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\diagram_table.cs",
+              "RelativeToolTip": "school_analytics\\diagram_table.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-22T21:47:34.237Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "BD_import.cs",
               "DocumentMoniker": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\BD_import.cs",
               "RelativeDocumentMoniker": "school_analytics\\BD_import.cs",
@@ -94,12 +141,11 @@
               "RelativeToolTip": "school_analytics\\BD_import.cs",
               "ViewState": "AgIAAD0AAAAAAAAAAAAAwEUAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-19T19:13:59.865Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-19T19:13:59.865Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "BD_teacher.cs",
               "DocumentMoniker": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\BD_teacher.cs",
               "RelativeDocumentMoniker": "school_analytics\\BD_teacher.cs",
@@ -111,50 +157,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "data_import.cs",
               "DocumentMoniker": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\data_import.cs",
               "RelativeDocumentMoniker": "school_analytics\\data_import.cs",
               "ToolTip": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\data_import.cs",
               "RelativeToolTip": "school_analytics\\data_import.cs",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAAADgAAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAADQAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-18T15:05:45.657Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "analysis_1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "DocumentMoniker": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\analysis_1.cs",
-              "RelativeDocumentMoniker": "school_analytics\\analysis_1.cs",
-              "ToolTip": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\analysis_1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "RelativeToolTip": "school_analytics\\analysis_1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T20:10:42.409Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "diagram_table.cs",
-              "DocumentMoniker": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\diagram_table.cs",
-              "RelativeDocumentMoniker": "school_analytics\\diagram_table.cs",
-              "ToolTip": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\diagram_table.cs",
-              "RelativeToolTip": "school_analytics\\diagram_table.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAAwBYAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T21:47:34.237Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "DocumentMoniker": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\Form1.cs",
-              "RelativeDocumentMoniker": "school_analytics\\Form1.cs",
-              "ToolTip": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "RelativeToolTip": "school_analytics\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-11T19:48:15.548Z"
             },
             {
               "$type": "Document",
@@ -166,34 +178,12 @@
               "RelativeToolTip": "school_analytics\\data_menu.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAA7wB0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-18T15:04:00.061Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\Form1.cs",
-              "RelativeDocumentMoniker": "school_analytics\\Form1.cs",
-              "ToolTip": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\Form1.cs",
-              "RelativeToolTip": "school_analytics\\Form1.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAkwCsAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-11T19:50:12.149Z"
+              "WhenOpened": "2025-10-18T15:04:00.061Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "data_menu.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "DocumentMoniker": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\data_menu.cs",
-              "RelativeDocumentMoniker": "school_analytics\\data_menu.cs",
-              "ToolTip": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\data_menu.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "RelativeToolTip": "school_analytics\\data_menu.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-11T19:53:41.78Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
               "Title": "BD.cs",
               "DocumentMoniker": "G:\\Dasha\\1\u0423\u043D\u0438\u0432\u0435\u0440\\\u0414\u0438\u043F\u043B\u043E\u043C_\u041C\u0430\u0433\u0438\u0441\u0442\u0440\\program\\school_analytics\\school_analytics\\BD.cs",
               "RelativeDocumentMoniker": "school_analytics\\BD.cs",

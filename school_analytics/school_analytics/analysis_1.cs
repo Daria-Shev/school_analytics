@@ -155,5 +155,12 @@ namespace school_analytics
             // теперь передаём в твой метод отрисовки
             DrawChartByGenderAndYear(filtered);
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form ifrm = new analysis_menu();
+            ifrm.Show();
+            this.Close();
+        }
     }
 }
