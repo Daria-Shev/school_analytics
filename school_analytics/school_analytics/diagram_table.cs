@@ -56,20 +56,20 @@ namespace school_analytics
             bd.connectionBD();
 
             string sqlExpression = @"
-SELECT
-    t.teacher_id,
-    t.teacher_short_name,
-    g.grade_value,
-    c.class_year
-FROM dbo.grade g
-INNER JOIN dbo.student s
-    ON g.student_id = s.student_id
-INNER JOIN dbo.class c
-    ON s.class_id = c.class_id
-INNER JOIN dbo.teacher t
-    ON g.teacher_id = t.teacher_id
+            SELECT
+                t.teacher_id,
+                t.teacher_short_name,
+                g.grade_value,
+                c.class_year
+            FROM dbo.grade g
+            INNER JOIN dbo.student s
+                ON g.student_id = s.student_id
+            INNER JOIN dbo.class c
+                ON s.class_id = c.class_id
+            INNER JOIN dbo.teacher t
+                ON g.teacher_id = t.teacher_id
 
-";
+            ";
 
 
             SqlCommand cmd = new SqlCommand(sqlExpression, bd.connection);
@@ -87,14 +87,14 @@ INNER JOIN dbo.teacher t
             bd.connectionBD();
 
             string sqlExpression = @"
-SELECT
-    teacher_id,
-    teacher_short_name,
-    teacher_category,
-    teacher_experience,
-    teacher_rank
-FROM dbo.teacher;
-";
+            SELECT
+                teacher_id,
+                teacher_short_name,
+                teacher_category,
+                teacher_experience,
+                teacher_rank
+            FROM dbo.teacher;
+            ";
 
             SqlCommand cmd = new SqlCommand(sqlExpression, bd.connection);
 
@@ -106,6 +106,44 @@ FROM dbo.teacher;
             return table;
         }
 
+        public DataTable GetSubjectDPAGrades()
+        {
+            BD bd = new BD();
+            bd.connectionBD();
 
+            string sqlExpression = @"
+            SELECT 
+                g.grade_value,
+                s.subject_full_name,
+                t.teacher_short_name,
+                c.class_name,
+                c.class_year,
+                c.class_curriculum,
+                dpasubj.dpa_name AS subject_dpa,
+                d1.dpa_name AS dpa_name_1,
+                d2.dpa_name AS dpa_name_2,
+                d3.dpa_name AS dpa_name_3,
+                d4.dpa_name AS dpa_name_4
+            FROM dbo.grade g
+            INNER JOIN dbo.subject s ON g.subject_id = s.subject_id
+            INNER JOIN dbo.teacher t ON g.teacher_id = t.teacher_id
+            INNER JOIN dbo.student st ON g.student_id = st.student_id
+            INNER JOIN dbo.class c ON st.class_id = c.class_id
+            LEFT JOIN dbo.dpa dpasubj ON s.dpa_id = dpasubj.dpa_id
+            LEFT JOIN dbo.dpa d1 ON st.student_dpa_1 = d1.dpa_id
+            LEFT JOIN dbo.dpa d2 ON st.student_dpa_2 = d2.dpa_id
+            LEFT JOIN dbo.dpa d3 ON st.student_dpa_3 = d3.dpa_id
+            LEFT JOIN dbo.dpa d4 ON st.student_dpa_4 = d4.dpa_id;
+                        ";
+
+            SqlCommand cmd = new SqlCommand(sqlExpression, bd.connection);
+
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataTable table = new DataTable();
+            adapter.Fill(table);
+
+            bd.closeBD();
+            return table;
+        }
     }
 }

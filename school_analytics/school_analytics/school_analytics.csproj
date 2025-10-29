@@ -204,6 +204,12 @@
     <Compile Include="analysis_menu.Designer.cs">
       <DependentUpon>analysis_menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="analysis_subject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="analysis_subject.Designer.cs">
+      <DependentUpon>analysis_subject.cs</DependentUpon>
+    </Compile>
     <Compile Include="analysis_teacher.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -239,6 +245,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="analysis_menu.resx">
       <DependentUpon>analysis_menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="analysis_subject.resx">
+      <DependentUpon>analysis_subject.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="analysis_teacher.resx">
       <DependentUpon>analysis_teacher.cs</DependentUpon>
