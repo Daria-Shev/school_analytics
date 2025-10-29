@@ -27,7 +27,18 @@ namespace school_analytics
             diagram_table diagram_table = new diagram_table();
             allData = diagram_table.GetTeacherGrades();
             teacherData = diagram_table.GetTeachersOnly();
+            var years = allData.AsEnumerable()
+    .Select(r => r.Field<int>("class_year").ToString()) // ✅ сразу преобразуем в string
+       .Distinct()
+       .OrderBy(y => y)
+       .ToList();
 
+
+            // 🔹 (по желанию) добавляем "Все года"
+            years.Insert(0, "Всі роки");
+
+            comboBox1.DataSource = years;
+            comboBox1.SelectedIndex = 0;
             // Например: строим диаграмму успеваемости по предметам
             DrawChart(allData, teacherData);
         }
@@ -36,6 +47,7 @@ namespace school_analytics
             DrawTeacherRankPieChart(t_table);
             DrawTeacherCategoryPieChart(t_table);
             DrawTopTeachersBarChart(table);
+            DrawTeacherExperienceHistogram(t_table);
         }
 
         private void DrawTeacherRankPieChart(DataTable table)
@@ -70,7 +82,7 @@ namespace school_analytics
             area.Position = new ElementPosition(0, 0, 100, 90);
             area.InnerPlotPosition = new ElementPosition(20, 5, 60, 80);
 
-            Series rankSeries = new Series("Ранг викладача");
+            Series rankSeries = new Series("Звання вчителя");
             rankSeries.ChartType = SeriesChartType.Pie;
             rankSeries.BorderColor = Color.White;
             rankSeries.BorderWidth = 2;
@@ -92,7 +104,7 @@ namespace school_analytics
             {
                 Docking = Docking.Bottom,
                 Alignment = StringAlignment.Center,
-                Title = "Ранги викладачів",
+                Title = "Звання вчителя",
                 Font = new Font("Segoe UI", 9, FontStyle.Regular)
             };
             chart1.Legends.Add(legend);
@@ -100,7 +112,7 @@ namespace school_analytics
             chart1.Series.Add(rankSeries);
 
             chart1.Titles.Clear();
-            chart1.Titles.Add(new Title("Розподіл викладачів за рангом", Docking.Top, new Font("Segoe UI", 12, FontStyle.Bold), Color.Black));
+            chart1.Titles.Add(new Title("Розподіл вчителів за званням", Docking.Top, new Font("Segoe UI", 12, FontStyle.Bold), Color.Black));
         }
 
 
@@ -143,7 +155,7 @@ namespace school_analytics
                 (float)newHeight
             );
 
-            Series catSeries = new Series("Категорія викладача");
+            Series catSeries = new Series("Категорія вчителя");
             catSeries.ChartType = SeriesChartType.Pie;
             catSeries.BorderColor = Color.White;
             catSeries.BorderWidth = 2;
@@ -165,7 +177,7 @@ namespace school_analytics
             {
                 Docking = Docking.Right,
                 Alignment = StringAlignment.Center,
-                Title = "Категорії викладачів",
+                Title = "Категорії вчителів",
                 Font = new Font("Segoe UI", 9, FontStyle.Regular),
                 IsTextAutoFit = false,
                 TableStyle = LegendTableStyle.Tall,
@@ -179,7 +191,7 @@ namespace school_analytics
             chart2.Series.Add(catSeries);
 
             chart2.Titles.Clear();
-            chart2.Titles.Add(new Title("Розподіл викладачів за категорією", Docking.Top, new Font("Segoe UI", 12, FontStyle.Bold), Color.Black));
+            chart2.Titles.Add(new Title("Розподіл вчителів за категорією", Docking.Top, new Font("Segoe UI", 12, FontStyle.Bold), Color.Black));
         }
 
         private void DrawTopTeachersBarChart(DataTable table)
@@ -227,17 +239,82 @@ namespace school_analytics
             {
                 Docking = Docking.Top,
                 Alignment = StringAlignment.Center,
-                Title = "Топ-5 викладачів",
+                //Title = "Топ-5 викладачів",
                 Font = new Font("Segoe UI", 9)
             });
 
             chart3.Series.Add(barSeries);
 
             chart3.Titles.Clear();
-            chart3.Titles.Add(new Title("Топ-5 викладачів за оцінками",
+            chart3.Titles.Add(new Title("Топ-5 вчителів за оцінками",
                 Docking.Top, new Font("Segoe UI", 12, FontStyle.Bold), Color.Black));
         }
 
+        private void DrawTeacherExperienceHistogram(DataTable table)
+        {
+            // 🔹 Групуємо стаж по діапазонах
+            var grouped = table.AsEnumerable()
+                .Select(r => r.Field<int?>("teacher_experience") ?? 0)
+                .GroupBy(exp =>
+                {
+                    if (exp <= 10) return "0–10";
+                    else if (exp <= 20) return "11–20";
+                    else if (exp <= 30) return "21–30";
+                    else if (exp <= 40) return "31–40";
+                    else return "41+";
+                })
+                .Select(g => new { Range = g.Key, Count = g.Count() })
+                .OrderBy(g => g.Range)
+                .ToList();
+
+            chart4.Series.Clear();
+            chart4.ChartAreas.Clear();
+            chart4.ChartAreas.Add(new ChartArea("MainArea"));
+
+            var series = new Series("Кількість вчителів")
+            {
+                ChartType = SeriesChartType.Column,
+                Color = Color.MediumSeaGreen,
+                BorderWidth = 2,
+                Legend = "Default",
+                IsValueShownAsLabel = true
+            };
+
+            foreach (var g in grouped)
+            {
+                int idx = series.Points.AddXY(g.Range, g.Count);
+                series.Points[idx].Label = g.Count.ToString();
+            }
+
+            // 🔹 Легенда
+            chart4.Legends.Clear();
+            chart4.Legends.Add(new Legend("Default")
+            {
+                Docking = Docking.Top,
+                Alignment = StringAlignment.Center,
+                //Title = "Розподіл викладачів за стажем",
+                Font = new Font("Segoe UI", 9)
+            });
+
+            // 🔹 Налаштування осей
+            var area = chart4.ChartAreas["MainArea"];
+            area.AxisX.Title = "Стаж";
+            area.AxisY.Title = "Кількість вчителів";
+            area.AxisX.Interval = 1;
+            area.AxisX.MajorGrid.Enabled = false;
+            area.AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dot;
+
+            chart4.Series.Add(series);
+
+            // 🔹 Заголовок
+            chart4.Titles.Clear();
+            chart4.Titles.Add(new Title(
+                "Розподіл вчителів за стажем роботи",
+                Docking.Top,
+                new Font("Segoe UI", 12, FontStyle.Bold),
+                Color.Black
+            ));
+        }
 
 
 
@@ -251,6 +328,25 @@ namespace school_analytics
             Form ifrm = new analysis_menu();
             ifrm.Show();
             this.Close();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selected = comboBox1.SelectedItem.ToString();
+
+            if (selected == "Всі роки")
+            {
+                DrawTopTeachersBarChart(allData); // без фильтра
+            }
+            else
+            {
+                int year = int.Parse(selected);
+                var filtered = allData.AsEnumerable()
+                    .Where(r => r.Field<int>("class_year") == year)
+                    .CopyToDataTable();
+
+                DrawTopTeachersBarChart(filtered);
+            }
         }
     }
 }
