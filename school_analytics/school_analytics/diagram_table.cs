@@ -59,14 +59,20 @@ namespace school_analytics
 SELECT
     t.teacher_id,
     t.teacher_short_name,
-    g.grade_value
-FROM dbo.teacher t
-LEFT JOIN dbo.grade g
+    g.grade_value,
+    c.class_year
+FROM dbo.grade g
+INNER JOIN dbo.student s
+    ON g.student_id = s.student_id
+INNER JOIN dbo.class c
+    ON s.class_id = c.class_id
+INNER JOIN dbo.teacher t
     ON g.teacher_id = t.teacher_id
-            ";
+
+";
+
 
             SqlCommand cmd = new SqlCommand(sqlExpression, bd.connection);
-
             SqlDataAdapter adapter = new SqlDataAdapter(cmd);
             DataTable table = new DataTable();
             adapter.Fill(table);

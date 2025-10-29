@@ -184,7 +184,6 @@ namespace school_analytics
 
         private void DrawTopTeachersBarChart(DataTable table)
         {
-            // 🔹 Обчислюємо топ-5 викладачів за середнім балом
             var topTeachers = table.AsEnumerable()
                 .GroupBy(r => new
                 {
@@ -217,14 +216,12 @@ namespace school_analytics
                 Legend = "Default"
             };
 
-            // 🔹 Додаємо точки зверху вниз
             for (int i = topTeachers.Count - 1; i >= 0; i--)
             {
                 int idx = barSeries.Points.AddXY(topTeachers[i].TeacherName, topTeachers[i].AverageGrade);
                 barSeries.Points[idx].Label = topTeachers[i].AverageGrade.ToString("F2");
             }
 
-            // 🔹 Легенда
             chart3.Legends.Clear();
             chart3.Legends.Add(new Legend("Default")
             {
@@ -236,11 +233,12 @@ namespace school_analytics
 
             chart3.Series.Add(barSeries);
 
-            // 🔹 Заголовок
             chart3.Titles.Clear();
             chart3.Titles.Add(new Title("Топ-5 викладачів за оцінками",
                 Docking.Top, new Font("Segoe UI", 12, FontStyle.Bold), Color.Black));
         }
+
+
 
 
 
