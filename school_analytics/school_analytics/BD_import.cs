@@ -116,45 +116,6 @@ VALUES
         }
 
 
-        //        // 🔹 Метод для додавання учня
-        //        public int InsertStudent(studentData student, int classId)
-        //        {
-        //            BD bd = new BD();
-        //            bd.connectionBD();
-
-        //            string query = @"
-        //INSERT INTO student 
-        //(student_last_name, student_first_name, student_middle_name, student_gender, 
-        // student_dpa_1, student_dpa_2, student_dpa_3, student_dpa_4, class_id)
-        //OUTPUT INSERTED.student_id
-        //VALUES 
-        //(@last, @first, @middle, @gender, @dpa1, @dpa2, @dpa3, @dpa4, @class_id)";
-
-        //            SqlCommand cmd = new SqlCommand(query, bd.connection);
-        //            cmd.Parameters.AddWithValue("@last", student.student_last_name);
-        //            cmd.Parameters.AddWithValue("@first", student.student_first_name);
-        //            cmd.Parameters.AddWithValue("@middle", student.student_middle_name);
-        //            cmd.Parameters.AddWithValue("@gender", student.student_gender);
-
-        //            // безопасная вставка DPA полей
-        //            cmd.Parameters.AddWithValue("@dpa1", string.IsNullOrWhiteSpace(student.student_dpa_1) ? (object)DBNull.Value : student.student_dpa_1);
-        //            cmd.Parameters.AddWithValue("@dpa2", string.IsNullOrWhiteSpace(student.student_dpa_2) ? (object)DBNull.Value : student.student_dpa_2);
-        //            cmd.Parameters.AddWithValue("@dpa3", string.IsNullOrWhiteSpace(student.student_dpa_3) ? (object)DBNull.Value : student.student_dpa_3);
-        //            cmd.Parameters.AddWithValue("@dpa4", string.IsNullOrWhiteSpace(student.student_dpa_4) ? (object)DBNull.Value : student.student_dpa_4);
-
-        //            cmd.Parameters.AddWithValue("@class_id", classId);
-
-        //            int newStudentId = (int)cmd.ExecuteScalar(); // отримуємо ID створеного учня
-        //            bd.closeBD();
-
-        //            return newStudentId;
-        //        }
-
-
-
-
-        //Временая проверка удалить потом 1
-
         public void InsertGrade1(string teacherShortName, string subjectShortName, int gradeValue, int studentId)
         {
             BD bd = new BD();

@@ -61,9 +61,9 @@
             this.buttonLoadExcel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(252)))), ((int)(((byte)(222)))));
             this.buttonLoadExcel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(248)))), ((int)(((byte)(206)))));
             this.buttonLoadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonLoadExcel.Location = new System.Drawing.Point(587, 132);
+            this.buttonLoadExcel.Location = new System.Drawing.Point(565, 166);
             this.buttonLoadExcel.Name = "buttonLoadExcel";
-            this.buttonLoadExcel.Size = new System.Drawing.Size(177, 40);
+            this.buttonLoadExcel.Size = new System.Drawing.Size(302, 40);
             this.buttonLoadExcel.TabIndex = 88;
             this.buttonLoadExcel.Text = "Імпортувати дані";
             this.buttonLoadExcel.UseVisualStyleBackColor = false;
@@ -140,9 +140,9 @@
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(252)))), ((int)(((byte)(222)))));
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(248)))), ((int)(((byte)(206)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Location = new System.Drawing.Point(587, 188);
+            this.button1.Location = new System.Drawing.Point(565, 222);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(177, 40);
+            this.button1.Size = new System.Drawing.Size(302, 40);
             this.button1.TabIndex = 98;
             this.button1.Text = "Зберегти";
             this.button1.UseVisualStyleBackColor = false;
@@ -153,9 +153,9 @@
             this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(252)))), ((int)(((byte)(222)))));
             this.button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(248)))), ((int)(((byte)(206)))));
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Location = new System.Drawing.Point(587, 241);
+            this.button3.Location = new System.Drawing.Point(565, 275);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(177, 40);
+            this.button3.Size = new System.Drawing.Size(302, 40);
             this.button3.TabIndex = 99;
             this.button3.Text = "Назад";
             this.button3.UseVisualStyleBackColor = false;
@@ -166,7 +166,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(251)))), ((int)(((byte)(233)))));
-            this.ClientSize = new System.Drawing.Size(969, 400);
+            this.ClientSize = new System.Drawing.Size(890, 400);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBoxCurriculum);
@@ -180,7 +180,7 @@
             this.Controls.Add(this.buttonLoadExcel);
             this.Controls.Add(this.dataGridView1);
             this.Name = "data_import";
-            this.Text = "data_import";
+            this.Text = "Імпорт даних";
             this.Load += new System.EventHandler(this.data_import_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

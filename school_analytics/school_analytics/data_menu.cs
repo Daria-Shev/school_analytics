@@ -31,5 +31,12 @@ namespace school_analytics
             ifrm.Show();
             this.Close();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Form ifrm = new data_subject();
+            ifrm.Show();
+            this.Close();
+        }
     }
 }

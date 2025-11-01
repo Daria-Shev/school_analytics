@@ -108,7 +108,7 @@
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button8);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Головне меню";
             this.ResumeLayout(false);
             this.PerformLayout();
 

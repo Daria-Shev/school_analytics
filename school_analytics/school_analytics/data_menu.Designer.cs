@@ -33,6 +33,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -68,15 +69,16 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(280, 47);
             this.button5.TabIndex = 42;
-            this.button5.Text = "Додавання даних";
+            this.button5.Text = "Предмети";
             this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button8
             // 
             this.button8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(252)))), ((int)(((byte)(222)))));
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button8.Location = new System.Drawing.Point(83, 261);
+            this.button8.Location = new System.Drawing.Point(83, 314);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(280, 47);
             this.button8.TabIndex = 41;
@@ -93,21 +95,35 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(280, 47);
             this.button1.TabIndex = 46;
-            this.button1.Text = "Редагування даних";
+            this.button1.Text = "Вчителі";
             this.button1.UseVisualStyleBackColor = false;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(252)))), ((int)(((byte)(222)))));
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button2.Location = new System.Drawing.Point(83, 261);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(280, 47);
+            this.button2.TabIndex = 47;
+            this.button2.Text = "Оцінки";
+            this.button2.UseVisualStyleBackColor = false;
             // 
             // data_menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(468, 337);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(251)))), ((int)(((byte)(233)))));
+            this.ClientSize = new System.Drawing.Size(468, 398);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button8);
             this.Name = "data_menu";
-            this.Text = "data_menu";
+            this.Text = "Введення та редагування даних";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -120,5 +136,6 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

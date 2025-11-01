@@ -84,6 +84,7 @@
             this.button5.TabIndex = 48;
             this.button5.Text = "даних";
             this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button8
             // 
@@ -109,7 +110,7 @@
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button8);
             this.Name = "analysis_menu";
-            this.Text = "analysis_menu";
+            this.Text = "208; 251; 233";
             this.ResumeLayout(false);
             this.PerformLayout();
 

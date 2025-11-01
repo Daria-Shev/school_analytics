@@ -38,7 +38,7 @@ namespace school_analytics
         }
         private void DrawChartByGenderAndYear(DataTable table)
         {
-            // Группируем по году и полу
+            // 🔹 Групуємо по року та статі
             var grouped = table.AsEnumerable()
                 .GroupBy(r => new
                 {
@@ -49,23 +49,25 @@ namespace school_analytics
                 {
                     Year = g.Key.Year,
                     Gender = g.Key.Gender,
-                    AvgGrade = Math.Round(g.Average(r => Convert.ToDouble(r["grade_value"])), 2) // округляем до 2 знаков
+                    AvgGrade = Math.Round(g.Average(r => Convert.ToDouble(r["grade_value"])), 2)
                 })
+                .OrderBy(x => x.Year)
                 .ToList();
 
             chart3.Series.Clear();
             chart3.ChartAreas.Clear();
             chart3.ChartAreas.Add(new ChartArea("MainArea"));
 
-            // Убираем сетку
-            chart3.ChartAreas["MainArea"].AxisX.MajorGrid.Enabled = false;
-            chart3.ChartAreas["MainArea"].AxisY.MajorGrid.Enabled = false;
+            // 🔹 Убираем сетку
+            var area = chart3.ChartAreas["MainArea"];
+            area.AxisX.MajorGrid.Enabled = false;
+            area.AxisY.MajorGrid.Enabled = false;
 
-            // Легенда по умолчанию
+            // 🔹 Легенда
             chart3.Legends.Clear();
             chart3.Legends.Add(new Legend("Default"));
 
-            // Отдельные серии для хлопців та дівчат
+            // 🔹 Серія хлопців
             Series boysSeries = new Series("Хлопці");
             boysSeries.ChartType = SeriesChartType.Column;
             boysSeries.Legend = "Default";
@@ -74,7 +76,9 @@ namespace school_analytics
                 "Year", "AvgGrade", ""
             );
             boysSeries["PointWidth"] = "0.4";
+            boysSeries.Color = Color.SkyBlue;
 
+            // 🔹 Серія дівчат
             Series girlsSeries = new Series("Дівчата");
             girlsSeries.ChartType = SeriesChartType.Column;
             girlsSeries.Legend = "Default";
@@ -83,24 +87,28 @@ namespace school_analytics
                 "Year", "AvgGrade", ""
             );
             girlsSeries["PointWidth"] = "0.4";
-            girlsSeries.Color = Color.LightPink; // задаем цвет
-
+            girlsSeries.Color = Color.LightPink;
 
             chart3.Series.Add(boysSeries);
             chart3.Series.Add(girlsSeries);
 
-            // Оси
-            chart3.ChartAreas["MainArea"].AxisX.Title = "Навчальний рік";
-            chart3.ChartAreas["MainArea"].AxisY.Title = "Середній бал";
-            chart3.ChartAreas["MainArea"].AxisX.Interval = 1;
+            // 🔹 Оформлення осей
+            area.AxisX.Title = "Навчальний рік";
+            area.AxisY.Title = "Середній бал";
+            area.AxisX.Interval = 1;
 
-            // Подписи над столбцами
+            // 🔹 Підписи над стовпчиками
             boysSeries.IsValueShownAsLabel = true;
             girlsSeries.IsValueShownAsLabel = true;
 
-            // Чтобы два столбца стояли рядом
+            // 🔹 Щоб стовпці стояли поруч
             boysSeries["DrawSideBySide"] = "True";
             girlsSeries["DrawSideBySide"] = "True";
+
+            // 🔹 Красиве оформлення
+            area.AxisY.Minimum = 0;
+            area.AxisY.LabelStyle.Format = "0.00"; // формат з двома знаками після коми
         }
+
     }
 }
