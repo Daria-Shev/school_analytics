@@ -115,10 +115,12 @@ namespace school_analytics
             SELECT 
                 g.grade_value,
                 s.subject_full_name,
+                s.subject_id,
                 t.teacher_short_name,
                 c.class_name,
                 c.class_year,
                 c.class_curriculum,
+                st.student_gender,
                 dpasubj.dpa_name AS subject_dpa,
                 d1.dpa_name AS dpa_name_1,
                 d2.dpa_name AS dpa_name_2,

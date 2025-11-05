@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using Newtonsoft.Json;
 using System.Data;
+using static school_analytics.BD_teacher;
 
 namespace school_analytics
 {
@@ -21,16 +22,44 @@ namespace school_analytics
 
 
         }
+        public List<subjectData> subject_list()
+        {
+            BD bd = new BD();
+            bd.connectionBD();
 
+            string sqlExpression = "SELECT [subject_id], [subject_full_name] FROM [analytics_school].[dbo].[subject]";
+            SqlCommand cmd = new SqlCommand(sqlExpression, bd.connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            List<subjectData> subjects = new List<subjectData>();
+            while (reader.Read())
+            {
+                subjects.Add(new subjectData
+                {
+                    subject_id = (int)reader["subject_id"],
+                    subject_full_name = reader["subject_full_name"].ToString()
+                });
+            }
+
+            bd.closeBD();
+            return subjects;
+        }
         public DataTable subject_table()
         {
             BD bd = new BD();
             bd.connectionBD();
 
             string sqlExpression = @"
-SELECT        dbo.subject.subject_id, dbo.subject.subject_full_name, dbo.subject.subject_short_name, dbo.subject.dpa_id, dbo.dpa.dpa_name
-FROM            dbo.dpa INNER JOIN
-                         dbo.subject ON dbo.dpa.dpa_id = dbo.subject.dpa_id;
+SELECT 
+    dbo.subject.subject_id, 
+    dbo.subject.subject_full_name, 
+    dbo.subject.subject_short_name, 
+    dbo.subject.dpa_id, 
+    dbo.dpa.dpa_name
+FROM 
+    dbo.subject
+LEFT JOIN 
+    dbo.dpa ON dbo.dpa.dpa_id = dbo.subject.dpa_id;
                         ";
 
             SqlCommand cmd = new SqlCommand(sqlExpression, bd.connection);
@@ -43,27 +72,6 @@ FROM            dbo.dpa INNER JOIN
             return table;
 
         }
-        public List<subjectData> subject_list()
-        {
-            BD bd = new BD();
-            bd.connectionBD();
-
-            string sqlExpression = "SELECT [[subject_id]], [subject_full_name] FROM [analytics_school].[dbo].[[subject]]";
-            SqlCommand cmd = new SqlCommand(sqlExpression, bd.connection);
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            List<subjectData> teachers = new List<subjectData>();
-            while (reader.Read())
-            {
-                teachers.Add(new subjectData
-                {
-                    subject_id = (int)reader["[subject_id]"],
-                    subject_full_name = reader["subject_full_name"].ToString()
-                });
-            }
-
-            bd.closeBD();
-            return teachers;
-        }
+       
     }
 }

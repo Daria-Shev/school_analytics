@@ -54,6 +54,7 @@ namespace school_analytics
                     Gender = g.Key.Gender,
                     AvgGrade = Math.Round(g.Average(r => Convert.ToDouble(r["grade_value"])), 2) // округляем до 2 знаков
                 })
+                .OrderBy(x => int.TryParse(x.Year, out var y) ? y : 0)
                 .ToList();
 
             chart3.Series.Clear();
@@ -66,7 +67,11 @@ namespace school_analytics
 
             // Легенда по умолчанию
             chart3.Legends.Clear();
-            chart3.Legends.Add(new Legend("Default"));
+            Legend legend = new Legend("Default");
+            legend.Docking = Docking.Bottom;            // Легенда внизу
+            legend.Alignment = StringAlignment.Center;  // По центру
+            legend.LegendStyle = LegendStyle.Row;       // Горизонтально в один ряд
+            chart3.Legends.Add(legend);
 
             // Отдельные серии для хлопців та дівчат
             Series boysSeries = new Series("Хлопці");
@@ -77,6 +82,8 @@ namespace school_analytics
                 "Year", "AvgGrade", ""
             );
             boysSeries["PointWidth"] = "0.4";
+            boysSeries.Color = Color.SkyBlue;
+
 
             Series girlsSeries = new Series("Дівчата");
             girlsSeries.ChartType = SeriesChartType.Column;

@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace school_analytics
 {
-    public partial class data_teacher : Form
+    public partial class analysis_program : Form
     {
-        public data_teacher()
+        public analysis_program()
         {
             InitializeComponent();
-        }
-
-        private void subject_nameLabel_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

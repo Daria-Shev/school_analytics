@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using static school_analytics.BD_subject;
+using static school_analytics.BD_teacher;
 
 namespace school_analytics
 {
@@ -23,9 +25,47 @@ namespace school_analytics
         {
 
             diagram_table diagram_table = new diagram_table();
-            allData = diagram_table.GetClassStudentGrades();
+            allData = diagram_table.GetSubjectDPAGrades();
 
             // Например: строим диаграмму успеваемости по предметам
+            
+            var years = allData.AsEnumerable()
+            .Select(r => r.Field<int>("class_year").ToString()) // ✅ сразу преобразуем в string
+            .Distinct()
+            .OrderBy(y => y)
+            .ToList();
+            years.Insert(0, "Всі роки");
+            comboBox1.DataSource = years;
+            comboBox1.SelectedIndex = 0;
+
+            //var subject = allData.AsEnumerable()
+            //    .Select(r => r.Field<string>("subject_full_name"))
+            //    //.Where(s => !string.IsNullOrWhiteSpace(s))   // для надійності
+            //    .Distinct()
+            //    .OrderBy(y => y)
+            //    .ToList();
+
+            //subject.Insert(0, "Всі предмети");
+            //comboBox2.DataSource = subject;
+            //comboBox2.SelectedIndex = 0;
+            BD_subject bdSubject = new BD_subject();
+
+            var subjects = bdSubject.subject_list();
+
+            // Добавляем пункт "всі" вручную
+            subjects.Insert(0, new subjectData
+            {
+                subject_id = 0,
+                subject_full_name = "Всі предмети"
+            });
+
+            comboBox2.DisplayMember = "subject_full_name";
+            comboBox2.ValueMember = "subject_id";
+            comboBox2.DataSource = subjects;
+
+            comboBox2.SelectedIndex = 0;
+
+
             DrawChart(allData);
 
 
@@ -65,7 +105,12 @@ namespace school_analytics
 
             // 🔹 Легенда
             chart3.Legends.Clear();
-            chart3.Legends.Add(new Legend("Default"));
+            //chart3.Legends.Add(new Legend("Default"));
+            Legend legend = new Legend("Default");
+            legend.Docking = Docking.Bottom;            // Легенда внизу
+            legend.Alignment = StringAlignment.Center;  // По центру
+            legend.LegendStyle = LegendStyle.Row;       // Горизонтально в один ряд
+            chart3.Legends.Add(legend);
 
             // 🔹 Серія хлопців
             Series boysSeries = new Series("Хлопці");
@@ -109,6 +154,55 @@ namespace school_analytics
             area.AxisY.Minimum = 0;
             area.AxisY.LabelStyle.Format = "0.00"; // формат з двома знаками після коми
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form ifrm = new analysis_menu();
+            ifrm.Show();
+            this.Close();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        private void ApplyFilters()
+        {
+            if (allData == null || allData.Rows.Count == 0)
+                return;
+
+            DataTable filtered = allData.Copy();
+
+            // Фильтр по году
+            string selectedYear = comboBox1.SelectedItem.ToString();
+            if (selectedYear != "Всі роки")
+            {
+                int year = int.Parse(selectedYear);
+                filtered = filtered.AsEnumerable()
+                    .Where(r => r.Field<int>("class_year") == year)
+                    .CopyToDataTable();
+            }
+
+            // Фильтр по предмету
+            int subjectId = Convert.ToInt32(comboBox2.SelectedValue);
+            if (subjectId != 0) // 0 = "Всі предмети"
+            {
+                filtered = filtered.AsEnumerable()
+                    .Where(r => r.Field<int>("subject_id") == subjectId)
+                    .CopyToDataTable();
+            }
+
+            // ✅ Рисуем диаграмму
+            DrawChart(filtered);
+        }
+
+
 
     }
 }
