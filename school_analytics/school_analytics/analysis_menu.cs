@@ -52,7 +52,7 @@ namespace school_analytics
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Form ifrm = new analysis_program();
+            Form ifrm = new analysis_dpa();
             ifrm.Show();
             this.Close();
         }

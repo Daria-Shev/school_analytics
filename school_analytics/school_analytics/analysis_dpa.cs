@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace school_analytics
 {
-    public partial class analysis_program : Form
+    public partial class analysis_dpa : Form
     {
-        public analysis_program()
+        public analysis_dpa()
         {
             InitializeComponent();
         }

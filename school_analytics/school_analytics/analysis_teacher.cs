@@ -48,6 +48,7 @@ namespace school_analytics
             DrawTeacherCategoryPieChart(t_table);
             DrawTopTeachersBarChart(table);
             DrawTeacherExperienceHistogram(t_table);
+            DrawClassTeacherAverageChart(table);
         }
 
         private void DrawTeacherRankPieChart(DataTable table)
@@ -317,7 +318,80 @@ namespace school_analytics
         }
 
 
+        private void DrawClassTeacherAverageChart(DataTable table)
+        {
+            if (table == null || table.Rows.Count == 0)
+            {
+                chart5.Series.Clear();
+                chart5.Titles.Clear();
+                return;
+            }
 
+            // 1) Считаем средний балл для каждого класса
+            var classAverages = table.AsEnumerable()
+                .Where(r => r["grade_value"] != DBNull.Value)
+                .GroupBy(r => new
+                {
+                    ClassId = r.Field<int>("class_id"),
+                    TeacherId = r.Field<int>("class_teacher_id"),
+                    TeacherName = r.Field<string>("teacher_short_name")
+                })
+                .Select(g => new
+                {
+                    g.Key.ClassId,
+                    g.Key.TeacherId,
+                    g.Key.TeacherName,
+                    ClassAverage = g.Average(x => Convert.ToDouble(x["grade_value"]))
+                })
+                .ToList();
+
+            if (!classAverages.Any())
+            {
+                chart5.Series.Clear();
+                chart5.Titles.Clear();
+                return;
+            }
+
+            // 2) Теперь считаем среднее между средними по каждому руководителю
+            var teacherAverages = classAverages
+                .GroupBy(x => new { x.TeacherId, x.TeacherName })
+                .Select(g => new
+                {
+                    g.Key.TeacherName,
+                    FinalAverage = g.Average(x => x.ClassAverage)
+                })
+                .OrderByDescending(x => x.FinalAverage)
+                .ToList();
+
+            // 3) Настройка диаграммы
+            chart5.Series.Clear();
+            chart5.ChartAreas.Clear();
+            chart5.ChartAreas.Add(new ChartArea("MainArea"));
+            var area = chart5.ChartAreas["MainArea"];
+
+            // Горизонтальная диаграмма
+            Series series = new Series("Середній бал класного керівника")
+            {
+                ChartType = SeriesChartType.Bar,
+                IsValueShownAsLabel = true
+            };
+
+            chart5.Series.Add(series);
+            chart5.Legends.Clear(); // убираем легенду
+
+            // 4) Добавляем данные
+            foreach (var item in teacherAverages)
+                series.Points.AddXY(item.TeacherName, Math.Round(item.FinalAverage, 2));
+
+            // Красиво оформляем оси
+            area.AxisX.Title = "Середній бал";
+            area.AxisY.Title = "Класні керівники";
+
+            // Заголовок
+            chart5.Titles.Clear();
+            chart5.Titles.Add(new Title("Середній бал по класах (за класними керівниками)",
+                Docking.Top, new Font("Segoe UI", 12, FontStyle.Bold), Color.Black));
+        }
 
 
 

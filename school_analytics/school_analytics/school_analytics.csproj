@@ -198,17 +198,17 @@
     <Compile Include="analysis_1.Designer.cs">
       <DependentUpon>analysis_1.cs</DependentUpon>
     </Compile>
+    <Compile Include="analysis_dpa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="analysis_dpa.Designer.cs">
+      <DependentUpon>analysis_dpa.cs</DependentUpon>
+    </Compile>
     <Compile Include="analysis_menu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="analysis_menu.Designer.cs">
       <DependentUpon>analysis_menu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="analysis_program.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="analysis_program.Designer.cs">
-      <DependentUpon>analysis_program.cs</DependentUpon>
     </Compile>
     <Compile Include="analysis_subject.cs">
       <SubType>Form</SubType>
@@ -262,11 +262,11 @@
     <EmbeddedResource Include="analysis_1.resx">
       <DependentUpon>analysis_1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="analysis_dpa.resx">
+      <DependentUpon>analysis_dpa.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="analysis_menu.resx">
       <DependentUpon>analysis_menu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="analysis_program.resx">
-      <DependentUpon>analysis_program.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="analysis_subject.resx">
       <DependentUpon>analysis_subject.cs</DependentUpon>

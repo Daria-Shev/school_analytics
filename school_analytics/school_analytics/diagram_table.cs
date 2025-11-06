@@ -60,7 +60,9 @@ namespace school_analytics
                 t.teacher_id,
                 t.teacher_short_name,
                 g.grade_value,
-                c.class_year
+                c.class_year,
+                c.class_id,
+	            c.class_teacher_id
             FROM dbo.grade g
             INNER JOIN dbo.student s
                 ON g.student_id = s.student_id
