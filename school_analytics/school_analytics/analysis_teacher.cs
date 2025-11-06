@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using static school_analytics.BD_teacher;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace school_analytics
 {
@@ -82,6 +83,7 @@ namespace school_analytics
             var area = chart1.ChartAreas["MainArea"];
             area.Position = new ElementPosition(0, 0, 100, 90);
             area.InnerPlotPosition = new ElementPosition(20, 5, 60, 80);
+
 
             Series rankSeries = new Series("Звання вчителя");
             rankSeries.ChartType = SeriesChartType.Pie;
@@ -195,7 +197,7 @@ namespace school_analytics
             chart2.Titles.Add(new Title("Розподіл вчителів за категорією", Docking.Top, new Font("Segoe UI", 12, FontStyle.Bold), Color.Black));
         }
 
-        private void DrawTopTeachersBarChart(DataTable table)
+        void DrawTopTeachersBarChart(DataTable table)
         {
             var topTeachers = table.AsEnumerable()
                 .GroupBy(r => new
@@ -213,7 +215,7 @@ namespace school_analytics
                         .DefaultIfEmpty(0)
                         .Average()
                 })
-                .OrderByDescending(x => x.AverageGrade)
+                .OrderByDescending(x => x.AverageGrade) // сортировка по убыванию — чем выше оценка, тем выше в списке
                 .Take(5)
                 .ToList();
 
@@ -224,15 +226,16 @@ namespace school_analytics
             Series barSeries = new Series("Середній бал")
             {
                 ChartType = SeriesChartType.Bar,
-                Color = Color.CornflowerBlue,
+                Color = Color.MediumAquamarine,
                 BorderWidth = 1,
                 Legend = "Default"
             };
 
+            // Заполняем столбцы (чтобы самый лучший был сверху)
             for (int i = topTeachers.Count - 1; i >= 0; i--)
             {
                 int idx = barSeries.Points.AddXY(topTeachers[i].TeacherName, topTeachers[i].AverageGrade);
-                barSeries.Points[idx].Label = topTeachers[i].AverageGrade.ToString("F2");
+                barSeries.Points[idx].Label = topTeachers[i].AverageGrade.ToString("F2"); // 2 знака после запятой
             }
 
             chart3.Legends.Clear();
@@ -240,16 +243,19 @@ namespace school_analytics
             {
                 Docking = Docking.Top,
                 Alignment = StringAlignment.Center,
-                //Title = "Топ-5 викладачів",
                 Font = new Font("Segoe UI", 9)
             });
 
             chart3.Series.Add(barSeries);
 
             chart3.Titles.Clear();
-            chart3.Titles.Add(new Title("Топ-5 вчителів за оцінками",
-                Docking.Top, new Font("Segoe UI", 12, FontStyle.Bold), Color.Black));
+            chart3.Titles.Add(
+                new Title("Топ-5 вчителів за оцінками", Docking.Top,
+                new Font("Segoe UI", 12, FontStyle.Bold),
+                Color.Black)
+            );
         }
+
 
         private void DrawTeacherExperienceHistogram(DataTable table)
         {
@@ -275,7 +281,7 @@ namespace school_analytics
             var series = new Series("Кількість вчителів")
             {
                 ChartType = SeriesChartType.Column,
-                Color = Color.MediumSeaGreen,
+                Color = Color.MediumAquamarine,
                 BorderWidth = 2,
                 Legend = "Default",
                 IsValueShownAsLabel = true
@@ -327,18 +333,17 @@ namespace school_analytics
                 return;
             }
 
-            // 1) Считаем средний балл для каждого класса
+            // 1) Средний балл внутри каждого класса
             var classAverages = table.AsEnumerable()
                 .Where(r => r["grade_value"] != DBNull.Value)
                 .GroupBy(r => new
                 {
                     ClassId = r.Field<int>("class_id"),
                     TeacherId = r.Field<int>("class_teacher_id"),
-                    TeacherName = r.Field<string>("teacher_short_name")
+                    TeacherName = r.Field<string>("class_teacher_name")
                 })
                 .Select(g => new
                 {
-                    g.Key.ClassId,
                     g.Key.TeacherId,
                     g.Key.TeacherName,
                     ClassAverage = g.Average(x => Convert.ToDouble(x["grade_value"]))
@@ -352,46 +357,53 @@ namespace school_analytics
                 return;
             }
 
-            // 2) Теперь считаем среднее между средними по каждому руководителю
-            var teacherAverages = classAverages
+            // 2) Средний по классным руководителям → округление → сортировка → TOP-5
+            var topClassTeachers = classAverages
                 .GroupBy(x => new { x.TeacherId, x.TeacherName })
                 .Select(g => new
                 {
-                    g.Key.TeacherName,
-                    FinalAverage = g.Average(x => x.ClassAverage)
+                    TeacherName = g.Key.TeacherName,
+                    FinalAverage = Math.Round(g.Average(x => x.ClassAverage), 2)
                 })
-                .OrderByDescending(x => x.FinalAverage)
+                .OrderByDescending(x => x.FinalAverage) // чем выше оценка, тем выше
+                .Take(5)
                 .ToList();
 
-            // 3) Настройка диаграммы
+            // 3) Оформление графика — как chart3
             chart5.Series.Clear();
             chart5.ChartAreas.Clear();
-            chart5.ChartAreas.Add(new ChartArea("MainArea"));
-            var area = chart5.ChartAreas["MainArea"];
+            chart5.Legends.Clear();
+            chart5.Titles.Clear();
 
-            // Горизонтальная диаграмма
-            Series series = new Series("Середній бал класного керівника")
+            chart5.ChartAreas.Add(new ChartArea("MainArea"));
+            Series barSeries = new Series("Середній бал")
             {
                 ChartType = SeriesChartType.Bar,
-                IsValueShownAsLabel = true
+                Color = Color.MediumAquamarine,
+                BorderWidth = 1,
+                Legend = "Default"
             };
 
-            chart5.Series.Add(series);
-            chart5.Legends.Clear(); // убираем легенду
+            // Добавляем так, чтобы лучший был сверху
+            for (int i = topClassTeachers.Count - 1; i >= 0; i--)
+            {
+                int idx = barSeries.Points.AddXY(topClassTeachers[i].TeacherName, topClassTeachers[i].FinalAverage);
+                barSeries.Points[idx].Label = topClassTeachers[i].FinalAverage.ToString("F2");
+            }
 
-            // 4) Добавляем данные
-            foreach (var item in teacherAverages)
-                series.Points.AddXY(item.TeacherName, Math.Round(item.FinalAverage, 2));
+            chart5.Series.Add(barSeries);
 
-            // Красиво оформляем оси
-            area.AxisX.Title = "Середній бал";
-            area.AxisY.Title = "Класні керівники";
-
-            // Заголовок
-            chart5.Titles.Clear();
-            chart5.Titles.Add(new Title("Середній бал по класах (за класними керівниками)",
-                Docking.Top, new Font("Segoe UI", 12, FontStyle.Bold), Color.Black));
+            // Заголовок как в chart3
+            chart5.Titles.Add(
+                new Title("Топ-5 класних керівників за середнім балом класу",
+                Docking.Top,
+                new Font("Segoe UI", 12, FontStyle.Bold),
+                Color.Black)
+            );
         }
+
+
+
 
 
 
@@ -406,21 +418,72 @@ namespace school_analytics
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ApplyFilters();
+        }
+
+        private void checkBox9_CheckedChanged(object sender, EventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        private void checkBox11_CheckedChanged(object sender, EventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        private void ApplyFilters()
+        {
+            if (allData == null || allData.Rows.Count == 0)
+                return;
+
+            DataTable filtered = allData;
+
+            // ---- Фильтр по году (комбо) ----
             string selected = comboBox1.SelectedItem.ToString();
 
-            if (selected == "Всі роки")
-            {
-                DrawTopTeachersBarChart(allData); // без фильтра
-            }
-            else
+            if (selected != "Всі роки")
             {
                 int year = int.Parse(selected);
-                var filtered = allData.AsEnumerable()
-                    .Where(r => r.Field<int>("class_year") == year)
-                    .CopyToDataTable();
 
-                DrawTopTeachersBarChart(filtered);
+                var rowsByYear = filtered.AsEnumerable()
+                    .Where(r => r.Field<int>("class_year") == year);
+
+                if (rowsByYear.Any())
+                    filtered = rowsByYear.CopyToDataTable();
+                else
+                    filtered = filtered.Clone();
             }
+
+            // ---- Фильтр по классу (чексбоксы 9 / 11) ----
+            bool show9 = checkBox9.Checked;
+            bool show11 = checkBox11.Checked;
+
+            if (show9 && !show11)
+            {
+                var rows = filtered.AsEnumerable()
+                    .Where(r => r.Field<string>("class_name").TrimStart().StartsWith("9"));
+
+                filtered = rows.Any() ? rows.CopyToDataTable() : filtered.Clone();
+            }
+            else if (!show9 && show11)
+            {
+                var rows = filtered.AsEnumerable()
+                    .Where(r => r.Field<string>("class_name").TrimStart().StartsWith("11"));
+
+                filtered = rows.Any() ? rows.CopyToDataTable() : filtered.Clone();
+            }
+            else if (!show9 && !show11)
+            {
+                // ничего не выбрано — пусто
+                filtered = filtered.Clone();
+            }
+            // если show9 && show11 → оставляем как есть (все классы)
+
+            // ---- Отрисовываем график ----
+            DrawTopTeachersBarChart(filtered);
+            DrawClassTeacherAverageChart(filtered);
         }
+
+
     }
 }

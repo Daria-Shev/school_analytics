@@ -56,20 +56,20 @@ namespace school_analytics
             bd.connectionBD();
 
             string sqlExpression = @"
-            SELECT
-                t.teacher_id,
-                t.teacher_short_name,
-                g.grade_value,
-                c.class_year,
-                c.class_id,
-	            c.class_teacher_id
-            FROM dbo.grade g
-            INNER JOIN dbo.student s
-                ON g.student_id = s.student_id
-            INNER JOIN dbo.class c
-                ON s.class_id = c.class_id
-            INNER JOIN dbo.teacher t
-                ON g.teacher_id = t.teacher_id
+SELECT 
+    t.teacher_id, 
+    t.teacher_short_name,        -- учитель, который ставит оценку (предметник)
+    g.grade_value, 
+    c.class_id,
+    c.class_year, 
+c.class_name,
+    c.class_teacher_id,          -- ID класного керівника
+    t2.teacher_short_name AS class_teacher_name -- ФИО класного керівника
+FROM dbo.grade g
+INNER JOIN dbo.student s ON g.student_id = s.student_id
+INNER JOIN dbo.class c ON s.class_id = c.class_id
+INNER JOIN dbo.teacher t ON g.teacher_id = t.teacher_id
+INNER JOIN dbo.teacher t2 ON c.class_teacher_id = t2.teacher_id  -- ВАЖНО
 
             ";
 
