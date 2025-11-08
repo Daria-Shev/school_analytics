@@ -115,6 +115,7 @@ INNER JOIN dbo.teacher t2 ON c.class_teacher_id = t2.teacher_id  -- ВАЖНО
 
             string sqlExpression = @"
             SELECT 
+                st.student_id,  
                 g.grade_value,
                 s.subject_full_name,
                 s.subject_id,
@@ -139,6 +140,25 @@ INNER JOIN dbo.teacher t2 ON c.class_teacher_id = t2.teacher_id  -- ВАЖНО
             LEFT JOIN dbo.dpa d3 ON st.student_dpa_3 = d3.dpa_id
             LEFT JOIN dbo.dpa d4 ON st.student_dpa_4 = d4.dpa_id;
                         ";
+
+            SqlCommand cmd = new SqlCommand(sqlExpression, bd.connection);
+
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataTable table = new DataTable();
+            adapter.Fill(table);
+
+            bd.closeBD();
+            return table;
+        }
+        public DataTable GetDPA()
+        {
+            BD bd = new BD();
+            bd.connectionBD();
+
+            string sqlExpression = @"
+            SELECT dpa_id,dpa_name
+            FROM analytics_school.dbo.dpa;
+            ";
 
             SqlCommand cmd = new SqlCommand(sqlExpression, bd.connection);
 

@@ -54,61 +54,68 @@ namespace school_analytics
 
         private void DrawTeacherRankPieChart(DataTable table)
         {
-            // 🔹 Власний порядок назв рангів
             string[] customOrder = { "вчитель-методист", "старший вчитель", "нема" };
 
-            // 🔹 Групування з врахуванням пустих значень та сортування за customOrder
-            //var grouped = table.AsEnumerable()
-            //    .GroupBy(r => r["teacher_rank"].ToString())
-            //    .Select(g => new
-            //    {
-            //        Rank = string.IsNullOrWhiteSpace(g.Key) ? "нема" : g.Key.Trim(),
-            //        Count = g.Select(x => x["teacher_id"]).Distinct().Count()
-            //    })
-            //    .OrderBy(g => Array.IndexOf(customOrder, g.Rank))
-            //    .ToList();
             var grouped = table.AsEnumerable()
-    .GroupBy(r => r.Field<string>("teacher_rank") ?? "")
-    .Select(g => new
-    {
-        Rank = string.IsNullOrWhiteSpace(g.Key) ? "нема" : g.Key.Trim(),
-        Count = g.Count() // 🔹 замість Distinct.Count()
-    })
-    .OrderBy(g => Array.IndexOf(customOrder, g.Rank))
-    .ToList();
+                .GroupBy(r => r.Field<string>("teacher_rank") ?? "")
+                .Select(g => new
+                {
+                    Rank = string.IsNullOrWhiteSpace(g.Key) ? "нема" : g.Key.Trim(),
+                    Count = g.Count()
+                })
+                .OrderBy(g => Array.IndexOf(customOrder, g.Rank))
+                .ToList();
+
             chart1.Series.Clear();
             chart1.ChartAreas.Clear();
             chart1.ChartAreas.Add(new ChartArea("MainArea"));
 
             var area = chart1.ChartAreas["MainArea"];
-            area.Position = new ElementPosition(0, 0, 100, 90);
-            area.InnerPlotPosition = new ElementPosition(20, 5, 60, 80);
+            area.Position = new ElementPosition(0, 0, 100, 100);
 
+            // ⬇️ Тот же стиль позиционирования круга, что и в chart2
+            double scale = 1;
+            double originalWidth = 45;
+            double originalHeight = 80;
+            double newWidth = originalWidth * scale;
+            double newHeight = originalHeight * scale;
+            double dy = (originalHeight - newHeight) / 2;
+            double dx = 5; // зсув ліворуч
+            area.InnerPlotPosition = new ElementPosition(
+                (float)dx,
+                (float)(10 + dy),
+                (float)newWidth,
+                (float)newHeight
+            );
 
             Series rankSeries = new Series("Звання вчителя");
             rankSeries.ChartType = SeriesChartType.Pie;
             rankSeries.BorderColor = Color.White;
             rankSeries.BorderWidth = 2;
-            rankSeries["PieLabelStyle"] = "Disabled"; // без тексту всередині
+            rankSeries["PieLabelStyle"] = "Disabled";
 
             double total = grouped.Sum(x => x.Count);
 
             foreach (var item in grouped)
             {
-                int pointIndex = rankSeries.Points.AddXY(item.Rank, item.Count);
+                int p = rankSeries.Points.AddXY(item.Rank, item.Count);
                 double percent = item.Count / total * 100;
-                rankSeries.Points[pointIndex].LegendText = $"{item.Rank} ({item.Count}, {percent:F1}%)";
+                rankSeries.Points[p].LegendText = $"{item.Rank} — {item.Count} ({percent:F1}%)";
             }
 
             rankSeries.Palette = ChartColorPalette.BrightPastel;
 
             chart1.Legends.Clear();
-            Legend legend = new Legend("Default")
+            Legend legend = new Legend("RightList")
             {
-                Docking = Docking.Bottom,
+                Docking = Docking.Right,
                 Alignment = StringAlignment.Center,
-                Title = "Звання вчителя",
-                Font = new Font("Segoe UI", 9, FontStyle.Regular)
+                Title = "Звання вчителів",
+                Font = new Font("Segoe UI", 9, FontStyle.Regular),
+                IsTextAutoFit = false,
+                TableStyle = LegendTableStyle.Tall,
+                TextWrapThreshold = 10,
+                BackColor = Color.Transparent
             };
             chart1.Legends.Add(legend);
 
@@ -119,7 +126,8 @@ namespace school_analytics
         }
 
 
-       
+
+
         private void DrawTeacherCategoryPieChart(DataTable table)
         {
             // 🔹 Власний порядок категорій
@@ -239,18 +247,18 @@ namespace school_analytics
             }
 
             chart3.Legends.Clear();
-            chart3.Legends.Add(new Legend("Default")
-            {
-                Docking = Docking.Top,
-                Alignment = StringAlignment.Center,
-                Font = new Font("Segoe UI", 9)
-            });
+            //chart3.Legends.Add(new Legend("Default")
+            //{
+            //    Docking = Docking.Top,
+            //    Alignment = StringAlignment.Center,
+            //    Font = new Font("Segoe UI", 9)
+            //});
 
             chart3.Series.Add(barSeries);
 
             chart3.Titles.Clear();
             chart3.Titles.Add(
-                new Title("Топ-5 вчителів за оцінками", Docking.Top,
+                new Title("Топ-5 вчителів за середніми оцінками", Docking.Top,
                 new Font("Segoe UI", 12, FontStyle.Bold),
                 Color.Black)
             );
@@ -395,7 +403,7 @@ namespace school_analytics
 
             // Заголовок как в chart3
             chart5.Titles.Add(
-                new Title("Топ-5 класних керівників за середнім балом класу",
+                new Title("Топ-5 класних керівників за середніми оцінками",
                 Docking.Top,
                 new Font("Segoe UI", 12, FontStyle.Bold),
                 Color.Black)
