@@ -46,129 +46,102 @@ namespace school_analytics
             DrawDPASelectionPieChart(table);
             DrawDPASelectionPieChart2(table);
             DrawDpaGradeInfluenceChart(table);
-            DrawGenderDpaInfluenceChart(table);
+            DrawDpaGenderStackedBarChart(table);
 
 
         }
-
-        private void DrawGenderDpaInfluenceChart(DataTable all)
+        private void DrawDpaGenderStackedBarChart(DataTable all)
         {
-            // --- 1. Получаем все уникальные ДПА ---
-            var allDpa = all.AsEnumerable()
+            // --- Подсчёт количества учеников по полу для каждого ДПА ---
+            var dpaGenderCounts = all.AsEnumerable()
                 .SelectMany(r => new[]
                 {
-            r.Field<string>("dpa_name_1"),
-            r.Field<string>("dpa_name_2"),
-            r.Field<string>("dpa_name_3"),
-            r.Field<string>("dpa_name_4")
+            new { Dpa = r.Field<string>("dpa_name_1"), Gender = r.Field<string>("student_gender") },
+            new { Dpa = r.Field<string>("dpa_name_2"), Gender = r.Field<string>("student_gender") },
+            new { Dpa = r.Field<string>("dpa_name_3"), Gender = r.Field<string>("student_gender") },
+            new { Dpa = r.Field<string>("dpa_name_4"), Gender = r.Field<string>("student_gender") }
                 })
-                .Where(x => !string.IsNullOrWhiteSpace(x))
-                .Distinct()
-                .ToList();
-
-            // --- 2. Определяем полы ---
-            var genders = all.AsEnumerable()
-                .Select(r => r.Field<string>("student_gender"))
-                .Where(g => !string.IsNullOrWhiteSpace(g))
-                .Distinct()
-                .ToList();
-
-            // --- 3. Расчёт процентного распределения ---
-            var genderDpaPercents = new List<(string Gender, string Dpa, double Percent)>();
-
-            foreach (var gender in genders)
-            {
-                // Уникальные ученики выбранного пола
-                var studentIds = all.AsEnumerable()
-                    .Where(r => r.Field<string>("student_gender") == gender)
-                    .Select(r => r.Field<int?>("student_id"))
-                    .Distinct()
-                    .ToList();
-
-                int totalStudents = studentIds.Count;
-                if (totalStudents == 0) continue;
-
-                foreach (var dpa in allDpa)
+                .Where(x => !string.IsNullOrWhiteSpace(x.Dpa))
+                .GroupBy(x => x.Dpa)
+                .Select(g =>
                 {
-                    int selectedCount = all.AsEnumerable()
-                        .Where(r => r.Field<string>("student_gender") == gender &&
-                                   (r.Field<string>("dpa_name_1") == dpa ||
-                                    r.Field<string>("dpa_name_2") == dpa ||
-                                    r.Field<string>("dpa_name_3") == dpa ||
-                                    r.Field<string>("dpa_name_4") == dpa))
-                        .Select(r => r.Field<int?>("student_id"))
-                        .Distinct()
-                        .Count();
+                    int male = g.Count(x => x.Gender != null &&
+                                            (x.Gender.ToLower().StartsWith("ч") || x.Gender.ToLower().StartsWith("m")));
+                    int female = g.Count(x => x.Gender != null &&
+                                              (x.Gender.ToLower().StartsWith("ж") || x.Gender.ToLower().StartsWith("f")));
+                    int total = male + female;
+                    double malePercent = total > 0 ? (male * 100.0 / total) : 0;
+                    double femalePercent = total > 0 ? (female * 100.0 / total) : 0;
+                    return new
+                    {
+                        Dpa = g.Key,
+                        MalePercent = malePercent,
+                        FemalePercent = femalePercent
+                    };
+                })
+                .OrderByDescending(x => x.MalePercent + x.FemalePercent)
+                .ToList();
 
-                    double percent = (double)selectedCount / totalStudents * 100.0;
-                    genderDpaPercents.Add((gender, dpa, percent));
-                }
-            }
-
-            // --- 4. Настройка chart4 ---
+            // ---------- ДИЗАЙН ----------
             chart4.Series.Clear();
             chart4.ChartAreas.Clear();
+            chart4.Legends.Clear();
+            chart4.Titles.Clear();
+
             chart4.ChartAreas.Add(new ChartArea("MainArea"));
             var area = chart4.ChartAreas["MainArea"];
+
             area.AxisX.MajorGrid.Enabled = false;
             area.AxisY.MajorGrid.Enabled = false;
-            area.AxisX.Title = "Відсоток від учнів своєї статі (%)";
-            area.AxisY.Title = "Предмет ДПА";
-            area.AxisX.Interval = 10;
+            area.AxisX.LabelStyle.Font = new Font("Segoe UI", 9);
+            area.AxisY.LabelStyle.Font = new Font("Segoe UI", 9);
 
-            // --- 5. Создаём две серии: мальчики и девочки ---
-            var boysSeries = new Series("Чоловіки")
+            area.AxisY.Title = "% учнів";
+            area.AxisY.Maximum = 100; // проценты
+            area.AxisY.Interval = 20; // шкала 0–20–40–60–80–100
+
+            // Серии — тот же стиль
+            Series maleSeries = new Series("Чоловіки")
             {
-                ChartType = SeriesChartType.Bar,  // горизонтальные столбцы
-                BorderWidth = 1,
-                IsValueShownAsLabel = true,
-                Color = Color.SkyBlue
+                ChartType = SeriesChartType.StackedBar,
+                Color = Color.SteelBlue,
+                BorderWidth = 1
             };
 
-            var girlsSeries = new Series("Жінки")
+            Series femaleSeries = new Series("Жінки")
             {
-                ChartType = SeriesChartType.Bar,
-                BorderWidth = 1,
-                IsValueShownAsLabel = true,
-                Color = Color.LightPink
+                ChartType = SeriesChartType.StackedBar,
+                Color = Color.LightCoral,
+                BorderWidth = 1
             };
 
-            // --- 6. Добавляем данные в серии ---
-            foreach (var dpa in allDpa)
+            // Добавляем данные (лучший сверху)
+            for (int i = dpaGenderCounts.Count - 1; i >= 0; i--)
             {
-                var boyPercent = genderDpaPercents.FirstOrDefault(x => x.Gender.ToLower().StartsWith("ч") && x.Dpa == dpa).Percent;
-                var girlPercent = genderDpaPercents.FirstOrDefault(x => x.Gender.ToLower().StartsWith("ж") && x.Dpa == dpa).Percent;
-
-                int bIdx = boysSeries.Points.AddXY(dpa, boyPercent);
-                int gIdx = girlsSeries.Points.AddXY(dpa, girlPercent);
-
-                boysSeries.Points[bIdx].Label = boyPercent > 0 ? boyPercent.ToString("F1") + "%" : "";
-                girlsSeries.Points[gIdx].Label = girlPercent > 0 ? girlPercent.ToString("F1") + "%" : "";
+                var d = dpaGenderCounts[i];
+                maleSeries.Points.AddXY(d.Dpa, d.MalePercent);
+                femaleSeries.Points.AddXY(d.Dpa, d.FemalePercent);
             }
 
-            chart4.Series.Add(boysSeries);
-            chart4.Series.Add(girlsSeries);
+            chart4.Series.Add(maleSeries);
+            chart4.Series.Add(femaleSeries);
 
-            // --- 7. Легенда и заголовок ---
-            chart4.Legends.Clear();
-            var legend = new Legend("Стать")
+            // Легенда и заголовок
+            chart4.Legends.Add(new Legend("Default")
             {
-                Docking = Docking.Bottom,
-                Alignment = StringAlignment.Center
-            };
-            chart4.Legends.Add(legend);
+                Docking = Docking.Top,
+                Alignment = StringAlignment.Center,
+                Font = new Font("Segoe UI", 9),
+                BackColor = Color.White
+            });
 
-            chart4.Titles.Clear();
             chart4.Titles.Add(new Title(
-                "Вибір предметів ДПА за статтю (у % від кількості учнів своєї статі)",
+                "Розподіл вибору ДПА за статтю (у відсотках)",
                 Docking.Top,
                 new Font("Segoe UI", 12, FontStyle.Bold),
                 Color.Black
             ));
         }
-
-
-
 
         private void DrawDpaGradeInfluenceChart(DataTable all)
         {
