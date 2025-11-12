@@ -492,6 +492,9 @@ namespace school_analytics
             DrawClassTeacherAverageChart(filtered);
         }
 
+        private void chart1_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

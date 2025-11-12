@@ -88,7 +88,6 @@ namespace school_analytics
                 return;
             }
 
-            // Групуємо по навчальній програмі
             var grouped = table.AsEnumerable()
                 .Where(r => !r.IsNull("class_curriculum") && r["class_curriculum"].ToString() != "")
                 .GroupBy(r => r["class_curriculum"].ToString())
@@ -103,26 +102,23 @@ namespace school_analytics
             chart2.Series.Clear();
             chart2.Titles.Clear();
             chart2.ChartAreas.Clear();
-            chart2.ChartAreas.Add(new ChartArea("MainArea"));
-            var area = chart2.ChartAreas["MainArea"];
+            chart2.ChartAreas.Add(new ChartArea("mainarea"));
+            var area = chart2.ChartAreas["mainarea"];
 
-            // Убираем сетку
             area.AxisX.MajorGrid.Enabled = false;
             area.AxisY.MajorGrid.Enabled = false;
 
-            // Стираем легенду (не нужна)
             chart2.Legends.Clear();
 
-            Series series = new Series("Середній бал");
-            series.ChartType = SeriesChartType.Column; // вертикальні стовпці
-            series.IsValueShownAsLabel = true; // показати значення над стовпчиками
+            Series series = new Series("середній бал");
+            series.ChartType = SeriesChartType.Column;
+            series.IsValueShownAsLabel = true;
+            series.Color = Color.MediumAquamarine; // 🌿 цвет столбцов
             chart2.Series.Add(series);
 
-            // Заповнюємо дані
             foreach (var item in grouped)
                 series.Points.AddXY(item.Curriculum, item.AvgGrade);
 
-            // Підписи осей
             area.AxisX.Title = "Навчальна програма";
             area.AxisY.Title = "Середній бал";
 
@@ -132,12 +128,12 @@ namespace school_analytics
             area.AxisX.Interval = 1;
             area.AxisY.Interval = 2;
 
-            // Назва діаграми
             chart2.Titles.Add(new Title("Середні оцінки по навчальних програмах",
                 Docking.Top,
-                new Font("Segoe UI", 12, FontStyle.Bold),
+                new Font("segoe ui", 12, FontStyle.Bold),
                 Color.Black));
         }
+
 
 
         private void DrawChartByYear(DataTable table)
@@ -172,6 +168,10 @@ namespace school_analytics
             series.Points.DataBind(grouped, "Year", "AvgGrade", "");
             series.IsValueShownAsLabel = true; // Показ значений над столбцами
             series["PointWidth"] = "0.5";
+
+            // Цвет столбцов
+            series.Color = Color.MediumAquamarine;
+
             chart3.Series.Add(series);
 
             // Осі
@@ -187,6 +187,7 @@ namespace school_analytics
             chart3.Titles.Add(new Title("Середні оцінки по роках", Docking.Top,
                 new Font("Segoe UI", 12, FontStyle.Bold), Color.Black));
         }
+
 
         private void DrawChartByTeacherAverage(DataTable table)
         {
@@ -216,24 +217,29 @@ namespace school_analytics
             chart4.Legends.Add(legend);
 
             Series series = new Series("Середній бал");
-            series.ChartType = SeriesChartType.Bar; // <-- Горизонтальные столбцы
+            series.ChartType = SeriesChartType.Bar; // <-- горизонтальные столбцы
             series.Legend = "Default";
             series.Points.DataBind(grouped, "Teacher", "AvgGrade", "");
             series.IsValueShownAsLabel = true;
             series["PointWidth"] = "0.6";
+            series.Color = Color.MediumAquamarine; // <-- добавлен цвет
 
             chart4.Series.Add(series);
 
-            area.AxisY.Title = "Середній бал";      
+            area.AxisY.Title = "Середній бал";
             //area.AxisX.Title = "Вчителі"; // Баллы снизу
 
             area.AxisX.Minimum = 0;
             area.AxisX.LabelStyle.Format = "0.00";
-
             area.AxisY.Interval = 1;
 
             chart4.Titles.Clear();
-            chart4.Titles.Add(new Title("Середні оцінки по вчителям", Docking.Top, new Font("Segoe UI", 12, FontStyle.Bold), Color.Black));
+            chart4.Titles.Add(new Title(
+                "Середні оцінки по вчителям",
+                Docking.Top,
+                new Font("Segoe UI", 12, FontStyle.Bold),
+                Color.Black
+            ));
         }
         private void DrawSubjectDPACountChart(DataTable table)
         {
@@ -280,25 +286,26 @@ namespace school_analytics
             chart1.ChartAreas.Add(new ChartArea("MainArea"));
             var area = chart1.ChartAreas["MainArea"];
 
-            // ❗ Убираем сетку
+            // --- оформление осей ---
             area.AxisX.MajorGrid.Enabled = false;
             area.AxisY.MajorGrid.Enabled = false;
 
-            // ❗ Убираем легенду
+            // --- легенду убираем ---
             chart1.Legends.Clear();
 
-            Series series = new Series();
-            series.ChartType = SeriesChartType.Bar; // <-- Горизонтальные столбцы
+            // --- создаём серию ---
+            Series series = new Series("Кількість учнів");
+            series.ChartType = SeriesChartType.Bar; // горизонтальные столбцы
             series.IsValueShownAsLabel = true;
+            series.Color = Color.MediumAquamarine; // <-- добавлен цвет
             chart1.Series.Add(series);
 
-            // Добавляем данные
+            // --- добавляем данные ---
             foreach (var item in grouped)
                 series.Points.AddXY(item.Teacher, item.Count);
 
-            // Подписи и оформление
+            // --- подписи и оформление ---
             area.AxisY.Title = "Кількість учнів";
-
 
             int maxValue = grouped.Max(x => x.Count);
             if (maxValue <= 10)
@@ -310,15 +317,17 @@ namespace school_analytics
             else
                 area.AxisY.Interval = 10;
 
-
             area.AxisX.Minimum = 0;
             area.AxisX.LabelStyle.Format = "0";
 
-            //area.AxisY.Interval = 1;
-
-            chart1.Titles.Add(new Title("Кількість учнів, що обрали ДПА з цього предмету", Docking.Top,
-                new Font("Segoe UI", 12, FontStyle.Bold), Color.Black));
+            chart1.Titles.Add(new Title(
+                "Кількість учнів, що обрали ДПА з цього предмету",
+                Docking.Top,
+                new Font("Segoe UI", 12, FontStyle.Bold),
+                Color.Black
+            ));
         }
+
 
 
 

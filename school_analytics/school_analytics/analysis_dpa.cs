@@ -101,17 +101,17 @@ namespace school_analytics
             area.AxisY.Interval = 20; // шкала 0–20–40–60–80–100
 
             // Серии — тот же стиль
-            Series maleSeries = new Series("Чоловіки")
+            Series maleSeries = new Series("Хлопці")
             {
                 ChartType = SeriesChartType.StackedBar,
-                Color = Color.SteelBlue,
+                Color = Color.SkyBlue,
                 BorderWidth = 1
             };
 
-            Series femaleSeries = new Series("Жінки")
+            Series femaleSeries = new Series("Дівчата")
             {
                 ChartType = SeriesChartType.StackedBar,
-                Color = Color.LightCoral,
+                Color = Color.LightPink,
                 BorderWidth = 1
             };
 
@@ -405,6 +405,72 @@ namespace school_analytics
             Form ifrm = new analysis_menu();
             ifrm.Show();
             this.Close();
+        }
+        private void ApplyFilters()
+        {
+            if (allData == null || allData.Rows.Count == 0)
+                return;
+
+            DataTable filtered = allData;
+
+            // ---- Фильтр по году (комбо) ----
+            string selected = comboBox1.SelectedItem.ToString();
+
+            if (selected != "Всі роки")
+            {
+                int year = int.Parse(selected);
+
+                var rowsByYear = filtered.AsEnumerable()
+                    .Where(r => r.Field<int>("class_year") == year);
+
+                if (rowsByYear.Any())
+                    filtered = rowsByYear.CopyToDataTable();
+                else
+                    filtered = filtered.Clone();
+            }
+
+            // ---- Фильтр по классу (чексбоксы 9 / 11) ----
+            bool show9 = checkBox9.Checked;
+            bool show11 = checkBox11.Checked;
+
+            if (show9 && !show11)
+            {
+                var rows = filtered.AsEnumerable()
+                    .Where(r => r.Field<string>("class_name").TrimStart().StartsWith("9"));
+
+                filtered = rows.Any() ? rows.CopyToDataTable() : filtered.Clone();
+            }
+            else if (!show9 && show11)
+            {
+                var rows = filtered.AsEnumerable()
+                    .Where(r => r.Field<string>("class_name").TrimStart().StartsWith("11"));
+
+                filtered = rows.Any() ? rows.CopyToDataTable() : filtered.Clone();
+            }
+            else if (!show9 && !show11)
+            {
+                // ничего не выбрано — пусто
+                filtered = filtered.Clone();
+            }
+            // если show9 && show11 → оставляем как есть (все классы)
+
+            // ---- Отрисовываем график ----
+            DrawChart(filtered);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        private void checkBox9_CheckedChanged(object sender, EventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        private void checkBox11_CheckedChanged(object sender, EventArgs e)
+        {
+            ApplyFilters();
         }
     }
 }

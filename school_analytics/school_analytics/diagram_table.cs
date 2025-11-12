@@ -140,6 +140,38 @@ INNER JOIN dbo.teacher t2 ON c.class_teacher_id = t2.teacher_id  -- ВАЖНО
             LEFT JOIN dbo.dpa d3 ON st.student_dpa_3 = d3.dpa_id
             LEFT JOIN dbo.dpa d4 ON st.student_dpa_4 = d4.dpa_id;
                         ";
+            
+
+            SqlCommand cmd = new SqlCommand(sqlExpression, bd.connection);
+
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataTable table = new DataTable();
+            adapter.Fill(table);
+
+            bd.closeBD();
+            return table;
+        }
+        public DataTable GetGrades()
+        {
+            BD bd = new BD();
+            bd.connectionBD();
+
+
+            string sqlExpression = @"
+            SELECT 
+                g.grade_value,
+                s.student_gender,
+                c.class_name,
+                c.class_curriculum,
+                c.class_year,
+                t.teacher_category,
+                t.teacher_experience,
+                t.teacher_rank
+            FROM grade AS g
+            LEFT JOIN student AS s ON g.student_id = s.student_id
+            LEFT JOIN class AS c ON s.class_id = c.class_id
+            LEFT JOIN teacher AS t ON g.teacher_id = t.teacher_id;
+            ";
 
             SqlCommand cmd = new SqlCommand(sqlExpression, bd.connection);
 

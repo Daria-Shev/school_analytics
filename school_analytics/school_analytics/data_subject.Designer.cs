@@ -35,20 +35,47 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.subject_nameTextBox = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.subject_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.subject_full_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.subject_short_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dpa_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dpa_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subject_nameTextBox = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             subject_nameLabel = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // subject_nameLabel
+            // 
+            subject_nameLabel.AutoSize = true;
+            subject_nameLabel.Location = new System.Drawing.Point(463, 30);
+            subject_nameLabel.Name = "subject_nameLabel";
+            subject_nameLabel.Size = new System.Drawing.Size(94, 13);
+            subject_nameLabel.TabIndex = 40;
+            subject_nameLabel.Text = "Назва предмета:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(463, 56);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(70, 13);
+            label1.TabIndex = 46;
+            label1.Text = "Скорочення:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(463, 82);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(34, 13);
+            label2.TabIndex = 48;
+            label2.Text = "ДПА:";
             // 
             // buttonBack
             // 
@@ -105,68 +132,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(414, 243);
             this.dataGridView1.TabIndex = 27;
             // 
-            // subject_nameLabel
-            // 
-            subject_nameLabel.AutoSize = true;
-            subject_nameLabel.Location = new System.Drawing.Point(463, 30);
-            subject_nameLabel.Name = "subject_nameLabel";
-            subject_nameLabel.Size = new System.Drawing.Size(94, 13);
-            subject_nameLabel.TabIndex = 40;
-            subject_nameLabel.Text = "Назва предмета:";
-            // 
-            // subject_nameTextBox
-            // 
-            this.subject_nameTextBox.Location = new System.Drawing.Point(563, 27);
-            this.subject_nameTextBox.Name = "subject_nameTextBox";
-            this.subject_nameTextBox.Size = new System.Drawing.Size(166, 20);
-            this.subject_nameTextBox.TabIndex = 41;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(463, 56);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(70, 13);
-            label1.TabIndex = 46;
-            label1.Text = "Скорочення:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(563, 53);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(166, 20);
-            this.textBox1.TabIndex = 47;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(463, 82);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(34, 13);
-            label2.TabIndex = 48;
-            label2.Text = "ДПА:";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(563, 82);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(166, 21);
-            this.comboBox1.TabIndex = 49;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(252)))), ((int)(((byte)(222)))));
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(252)))), ((int)(((byte)(208)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Location = new System.Drawing.Point(525, 156);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 26);
-            this.button1.TabIndex = 50;
-            this.button1.Text = "Зберегти";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // subject_id
             // 
             this.subject_id.DataPropertyName = "subject_id";
@@ -207,10 +172,46 @@
             this.dpa_name.ReadOnly = true;
             this.dpa_name.Width = 125;
             // 
+            // subject_nameTextBox
+            // 
+            this.subject_nameTextBox.Location = new System.Drawing.Point(563, 27);
+            this.subject_nameTextBox.Name = "subject_nameTextBox";
+            this.subject_nameTextBox.Size = new System.Drawing.Size(166, 20);
+            this.subject_nameTextBox.TabIndex = 41;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(563, 53);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(166, 20);
+            this.textBox1.TabIndex = 47;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(563, 82);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(166, 21);
+            this.comboBox1.TabIndex = 49;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(252)))), ((int)(((byte)(222)))));
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(252)))), ((int)(((byte)(208)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Location = new System.Drawing.Point(525, 156);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(150, 26);
+            this.button1.TabIndex = 50;
+            this.button1.Text = "Зберегти";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // data_subject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(251)))), ((int)(((byte)(233)))));
             this.ClientSize = new System.Drawing.Size(757, 273);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);
@@ -224,7 +225,7 @@
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.dataGridView1);
             this.Name = "data_subject";
-            this.Text = "data_subject";
+            this.Text = "Предмети";
             this.Load += new System.EventHandler(this.data_subject_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
