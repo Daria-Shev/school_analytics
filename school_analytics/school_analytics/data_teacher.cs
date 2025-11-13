@@ -21,5 +21,19 @@ namespace school_analytics
         {
 
         }
+
+        private void data_teacher_Load(object sender, EventArgs e)
+        {
+            BD_teacher bdTeacher = new BD_teacher();
+
+            dataGridView1.DataSource = bdTeacher.teacher_table();
+        }
+
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+            Form ifrm = new data_menu();
+            ifrm.Show();
+            this.Close();
+        }
     }
 }

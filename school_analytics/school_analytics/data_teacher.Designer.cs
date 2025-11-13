@@ -42,6 +42,9 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.teacher_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.teacher_last_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.teacher_first_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,9 +52,6 @@
             this.teacher_experience = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.teacher_category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.teacher_rank = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             label2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             subject_nameLabel = new System.Windows.Forms.Label();
@@ -161,6 +161,7 @@
             this.buttonBack.TabIndex = 54;
             this.buttonBack.Text = "Назад";
             this.buttonBack.UseVisualStyleBackColor = false;
+            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
             // 
             // buttonDelete
             // 
@@ -206,6 +207,28 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(721, 329);
             this.dataGridView1.TabIndex = 51;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(882, 76);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(166, 20);
+            this.textBox2.TabIndex = 62;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(882, 108);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(166, 20);
+            this.textBox3.TabIndex = 64;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(882, 134);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(166, 21);
+            this.comboBox2.TabIndex = 68;
             // 
             // teacher_id
             // 
@@ -253,6 +276,7 @@
             this.teacher_category.HeaderText = "Категорія";
             this.teacher_category.Name = "teacher_category";
             this.teacher_category.ReadOnly = true;
+            this.teacher_category.Width = 170;
             // 
             // teacher_rank
             // 
@@ -260,28 +284,6 @@
             this.teacher_rank.HeaderText = "Звання";
             this.teacher_rank.Name = "teacher_rank";
             this.teacher_rank.ReadOnly = true;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(882, 76);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(166, 20);
-            this.textBox2.TabIndex = 62;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(882, 108);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(166, 20);
-            this.textBox3.TabIndex = 64;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(882, 134);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(166, 21);
-            this.comboBox2.TabIndex = 68;
             // 
             // data_teacher
             // 
@@ -308,6 +310,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "data_teacher";
             this.Text = "Вчителя";
+            this.Load += new System.EventHandler(this.data_teacher_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

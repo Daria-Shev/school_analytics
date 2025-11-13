@@ -34,7 +34,7 @@ namespace school_analytics
             bd.connectionBD();
 
             string sqlExpression = @"
-            SELECT  teacher_id, teacher_last_name, teacher_first_name, teacher_middle_name, teacher_category, teacher_rank, teacher_experience
+            SELECT  teacher_last_name, teacher_first_name, teacher_middle_name, teacher_category, teacher_rank, teacher_experience
             FROM            dbo.teacher
                                     ";
 

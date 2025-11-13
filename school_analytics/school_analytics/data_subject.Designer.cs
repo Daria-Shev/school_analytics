@@ -88,6 +88,7 @@
             this.buttonBack.TabIndex = 30;
             this.buttonBack.Text = "Назад";
             this.buttonBack.UseVisualStyleBackColor = false;
+            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
             // 
             // buttonDelete
             // 

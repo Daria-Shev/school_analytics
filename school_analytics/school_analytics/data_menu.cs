@@ -38,5 +38,31 @@ namespace school_analytics
             ifrm.Show();
             this.Close();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form ifrm = new data_teacher();
+            ifrm.Show();
+            this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form ifrm = new data_grade();
+            ifrm.Show();
+            this.Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form ifrm = new data_class();
+            ifrm.Show();
+            this.Close();
+        }
+
+        private void data_menu_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

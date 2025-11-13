@@ -224,8 +224,27 @@
     </Compile>
     <Compile Include="BD.cs" />
     <Compile Include="BD_import.cs" />
+    <Compile Include="BD_student.cs" />
     <Compile Include="BD_subject.cs" />
     <Compile Include="BD_teacher.cs" />
+    <Compile Include="data_class.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="data_class.Designer.cs">
+      <DependentUpon>data_class.cs</DependentUpon>
+    </Compile>
+    <Compile Include="data_grade.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="data_grade.Designer.cs">
+      <DependentUpon>data_grade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="data_grade_add.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="data_grade_add.Designer.cs">
+      <DependentUpon>data_grade_add.cs</DependentUpon>
+    </Compile>
     <Compile Include="data_import.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -273,6 +292,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="analysis_teacher.resx">
       <DependentUpon>analysis_teacher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data_class.resx">
+      <DependentUpon>data_class.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data_grade.resx">
+      <DependentUpon>data_grade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data_grade_add.resx">
+      <DependentUpon>data_grade_add.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="data_import.resx">
       <DependentUpon>data_import.cs</DependentUpon>

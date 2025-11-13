@@ -33,5 +33,12 @@ namespace school_analytics
         {
 
         }
+
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+            Form ifrm = new data_menu();
+            ifrm.Show();
+            this.Close();
+        }
     }
 }
