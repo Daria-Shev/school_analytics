@@ -198,7 +198,7 @@ namespace school_analytics
                     Teacher = g.Key,
                     AvgGrade = Math.Round(g.Average(r => Convert.ToDouble(r["grade_value"])), 2)
                 })
-                .OrderBy(x => x.Teacher)
+                .OrderByDescending(x => x.AvgGrade)
                 .ToList();
 
             chart4.Series.Clear();

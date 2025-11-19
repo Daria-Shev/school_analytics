@@ -105,7 +105,7 @@
             this.chart4.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart4.Legends.Add(legend1);
-            this.chart4.Location = new System.Drawing.Point(25, 377);
+            this.chart4.Location = new System.Drawing.Point(9, 357);
             this.chart4.Name = "chart4";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
@@ -121,7 +121,7 @@
             this.chart2.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
             this.chart2.Legends.Add(legend2);
-            this.chart2.Location = new System.Drawing.Point(25, 71);
+            this.chart2.Location = new System.Drawing.Point(9, 51);
             this.chart2.Name = "chart2";
             series2.ChartArea = "ChartArea1";
             series2.Legend = "Legend1";
@@ -137,7 +137,7 @@
             this.chart3.ChartAreas.Add(chartArea3);
             legend3.Name = "Legend1";
             this.chart3.Legends.Add(legend3);
-            this.chart3.Location = new System.Drawing.Point(421, 71);
+            this.chart3.Location = new System.Drawing.Point(405, 51);
             this.chart3.Name = "chart3";
             series3.ChartArea = "ChartArea1";
             series3.Legend = "Legend1";
@@ -152,7 +152,7 @@
             this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(252)))), ((int)(((byte)(222)))));
             this.button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(248)))), ((int)(((byte)(206)))));
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Location = new System.Drawing.Point(807, 8);
+            this.button3.Location = new System.Drawing.Point(791, 5);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(177, 40);
             this.button3.TabIndex = 127;
@@ -166,7 +166,7 @@
             this.chart5.ChartAreas.Add(chartArea4);
             legend4.Name = "Legend1";
             this.chart5.Legends.Add(legend4);
-            this.chart5.Location = new System.Drawing.Point(421, 377);
+            this.chart5.Location = new System.Drawing.Point(405, 357);
             this.chart5.Name = "chart5";
             series4.ChartArea = "ChartArea1";
             series4.Legend = "Legend1";
@@ -181,7 +181,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(251)))), ((int)(((byte)(233)))));
-            this.ClientSize = new System.Drawing.Size(1009, 688);
+            this.ClientSize = new System.Drawing.Size(980, 669);
             this.Controls.Add(this.chart5);
             this.Controls.Add(this.checkBox11);
             this.Controls.Add(this.checkBox9);
