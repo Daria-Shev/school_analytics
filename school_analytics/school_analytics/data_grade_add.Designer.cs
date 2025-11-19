@@ -52,46 +52,65 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(397, 35);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(166, 21);
-            this.comboBox2.TabIndex = 108;
-            // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(343, 38);
+            label4.Location = new System.Drawing.Point(352, 37);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(52, 13);
             label4.TabIndex = 107;
             label4.Text = "Предмет";
             // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(397, 92);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(85, 20);
-            this.textBox2.TabIndex = 105;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
-            // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(343, 92);
+            label2.Location = new System.Drawing.Point(352, 91);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(44, 13);
             label2.TabIndex = 103;
             label2.Text = "Оцінка:";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(352, 61);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(48, 13);
+            label5.TabIndex = 122;
+            label5.Text = "Вчитель";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(373, 8);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(182, 13);
+            label1.TabIndex = 125;
+            label1.Text = "Андрусенко Антон Олександрович";
+            label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(406, 34);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(166, 21);
+            this.comboBox2.TabIndex = 108;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(406, 91);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(85, 20);
+            this.textBox2.TabIndex = 105;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(252)))), ((int)(((byte)(222)))));
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(252)))), ((int)(((byte)(208)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Location = new System.Drawing.Point(383, 156);
+            this.button1.Location = new System.Drawing.Point(392, 155);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(150, 26);
             this.button1.TabIndex = 121;
@@ -103,7 +122,7 @@
             this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(252)))), ((int)(((byte)(222)))));
             this.buttonBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(248)))), ((int)(((byte)(206)))));
             this.buttonBack.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonBack.Location = new System.Drawing.Point(383, 220);
+            this.buttonBack.Location = new System.Drawing.Point(392, 219);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(150, 26);
             this.buttonBack.TabIndex = 120;
@@ -115,7 +134,7 @@
             this.buttonDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(252)))), ((int)(((byte)(222)))));
             this.buttonDelete.FlatAppearance.BorderSize = 0;
             this.buttonDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonDelete.Location = new System.Drawing.Point(383, 188);
+            this.buttonDelete.Location = new System.Drawing.Point(392, 187);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(150, 26);
             this.buttonDelete.TabIndex = 119;
@@ -127,7 +146,7 @@
             this.buttonAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(252)))), ((int)(((byte)(222)))));
             this.buttonAdd.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(252)))), ((int)(((byte)(208)))));
             this.buttonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonAdd.Location = new System.Drawing.Point(383, 123);
+            this.buttonAdd.Location = new System.Drawing.Point(392, 122);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(150, 26);
             this.buttonAdd.TabIndex = 118;
@@ -137,19 +156,10 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(397, 62);
+            this.comboBox1.Location = new System.Drawing.Point(406, 61);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(166, 21);
             this.comboBox1.TabIndex = 123;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(343, 62);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(48, 13);
-            label5.TabIndex = 122;
-            label5.Text = "Вчитель";
             // 
             // dataGridView1
             // 
@@ -167,18 +177,8 @@
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(319, 246);
+            this.dataGridView1.Size = new System.Drawing.Size(334, 246);
             this.dataGridView1.TabIndex = 124;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(364, 9);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(182, 13);
-            label1.TabIndex = 125;
-            label1.Text = "Андрусенко Антон Олександрович";
-            label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // grade_id
             // 
@@ -225,7 +225,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(251)))), ((int)(((byte)(233)))));
-            this.ClientSize = new System.Drawing.Size(572, 270);
+            this.ClientSize = new System.Drawing.Size(586, 270);
             this.Controls.Add(label1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.comboBox1);
@@ -239,7 +239,7 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(label2);
             this.Name = "data_grade_add";
-            this.Text = "data_grade_add";
+            this.Text = "Оцінки";
             this.Load += new System.EventHandler(this.data_grade_add_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

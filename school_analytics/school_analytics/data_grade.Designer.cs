@@ -46,12 +46,6 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
-            this.button5 = new System.Windows.Forms.Button();
             this.student_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.student_last_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.student_first_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,6 +56,12 @@
             this.dpa_subject_2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dpa_subject_3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dpa_subject_4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.button5 = new System.Windows.Forms.Button();
             label4 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
@@ -118,6 +118,43 @@
             subject_nameLabel.Size = new System.Drawing.Size(51, 13);
             subject_nameLabel.TabIndex = 73;
             subject_nameLabel.Text = "Фамілія:";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(1003, 110);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(32, 13);
+            label6.TabIndex = 87;
+            label6.Text = "Клас";
+            label6.Click += new System.EventHandler(this.label6_Click);
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(910, 164);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(40, 13);
+            label5.TabIndex = 89;
+            label5.Text = "ДПА 2";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(910, 218);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(40, 13);
+            label7.TabIndex = 93;
+            label7.Text = "ДПА 4";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new System.Drawing.Point(910, 191);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(40, 13);
+            label8.TabIndex = 91;
+            label8.Text = "ДПА 3";
             // 
             // comboBox2
             // 
@@ -221,96 +258,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(891, 391);
             this.dataGridView1.TabIndex = 69;
             // 
-            // comboBox3
-            // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(951, 107);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(46, 21);
-            this.comboBox3.TabIndex = 86;
-            // 
-            // comboBox4
-            // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(1041, 107);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(109, 21);
-            this.comboBox4.TabIndex = 88;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(1003, 110);
-            label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(32, 13);
-            label6.TabIndex = 87;
-            label6.Text = "Клас";
-            label6.Click += new System.EventHandler(this.label6_Click);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(985, 161);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(166, 21);
-            this.comboBox1.TabIndex = 90;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(910, 164);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(40, 13);
-            label5.TabIndex = 89;
-            label5.Text = "ДПА 2";
-            // 
-            // comboBox5
-            // 
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(985, 215);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(166, 21);
-            this.comboBox5.TabIndex = 94;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(910, 218);
-            label7.Name = "label7";
-            label7.Size = new System.Drawing.Size(40, 13);
-            label7.TabIndex = 93;
-            label7.Text = "ДПА 4";
-            // 
-            // comboBox6
-            // 
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(985, 188);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(166, 21);
-            this.comboBox6.TabIndex = 92;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Location = new System.Drawing.Point(910, 191);
-            label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(40, 13);
-            label8.TabIndex = 91;
-            label8.Text = "ДПА 3";
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(252)))), ((int)(((byte)(222)))));
-            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(252)))), ((int)(((byte)(208)))));
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button5.Location = new System.Drawing.Point(913, 281);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(238, 26);
-            this.button5.TabIndex = 95;
-            this.button5.Text = "Переглянути оцінки";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
             // student_id
             // 
             this.student_id.DataPropertyName = "student_id";
@@ -387,6 +334,59 @@
             this.dpa_subject_4.Name = "dpa_subject_4";
             this.dpa_subject_4.ReadOnly = true;
             // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(951, 107);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(46, 21);
+            this.comboBox3.TabIndex = 86;
+            // 
+            // comboBox4
+            // 
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Location = new System.Drawing.Point(1041, 107);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(109, 21);
+            this.comboBox4.TabIndex = 88;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(985, 161);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(166, 21);
+            this.comboBox1.TabIndex = 90;
+            // 
+            // comboBox5
+            // 
+            this.comboBox5.FormattingEnabled = true;
+            this.comboBox5.Location = new System.Drawing.Point(985, 215);
+            this.comboBox5.Name = "comboBox5";
+            this.comboBox5.Size = new System.Drawing.Size(166, 21);
+            this.comboBox5.TabIndex = 94;
+            // 
+            // comboBox6
+            // 
+            this.comboBox6.FormattingEnabled = true;
+            this.comboBox6.Location = new System.Drawing.Point(985, 188);
+            this.comboBox6.Name = "comboBox6";
+            this.comboBox6.Size = new System.Drawing.Size(166, 21);
+            this.comboBox6.TabIndex = 92;
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(252)))), ((int)(((byte)(222)))));
+            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(252)))), ((int)(((byte)(208)))));
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button5.Location = new System.Drawing.Point(913, 281);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(238, 26);
+            this.button5.TabIndex = 95;
+            this.button5.Text = "Переглянути оцінки";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // data_grade
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -418,7 +418,7 @@
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.dataGridView1);
             this.Name = "data_grade";
-            this.Text = "data_grade";
+            this.Text = "Учні";
             this.Load += new System.EventHandler(this.data_grade_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
