@@ -210,11 +210,11 @@ namespace school_analytics
             area.AxisY.MajorGrid.Enabled = false;
 
             chart4.Legends.Clear();
-            Legend legend = new Legend("Default");
-            legend.Docking = Docking.Bottom;
-            legend.Alignment = StringAlignment.Center;
-            legend.LegendStyle = LegendStyle.Row;
-            chart4.Legends.Add(legend);
+            //Legend legend = new Legend("Default");
+            //legend.Docking = Docking.Bottom;
+            //legend.Alignment = StringAlignment.Center;
+            //legend.LegendStyle = LegendStyle.Row;
+            //chart4.Legends.Add(legend);
 
             Series series = new Series("Середній бал");
             series.ChartType = SeriesChartType.Bar; // <-- горизонтальные столбцы

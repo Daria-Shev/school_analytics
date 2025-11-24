@@ -56,5 +56,10 @@ FROM            dbo.class INNER JOIN
         {
             dataGridView1.DataSource = class_table();
         }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -136,7 +136,7 @@ namespace school_analytics
             });
 
             chart4.Titles.Add(new Title(
-                "Розподіл вибору ДПА за статтю (у відсотках)",
+                "Розподіл вибору ДПА за статтю у відсотках",
                 Docking.Top,
                 new Font("Segoe UI", 12, FontStyle.Bold),
                 Color.Black

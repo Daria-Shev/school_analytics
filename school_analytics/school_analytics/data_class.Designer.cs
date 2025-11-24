@@ -96,6 +96,7 @@
             this.buttonAdd.TabIndex = 52;
             this.buttonAdd.Text = "Додати";
             this.buttonAdd.UseVisualStyleBackColor = false;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // dataGridView1
             // 
